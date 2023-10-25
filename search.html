@@ -16,29 +16,30 @@
             background: rgba(170, 168, 168, 0.325);
         }
 
-        #js_search_input {
+        #js_input {
             border-radius: 150px;
             padding: 10px 20px;
             margin-bottom: 8px;
+            margin-top: 50px;
         }
 
-        .js_matchedContent {
+        .js_searchedContent {
             border-bottom: 1px solid rgba(170, 168, 168, 0.325);
             padding: 15px 5px;
         }
 
-        .js_matchedContent:nth-last-child(1) {
+        .js_searchedContent:nth-last-child(1) {
             border-bottom: 0;
         }
 
-        #js_search_input,
-        #js_searchList {
+        #js_input,
+        #js_productList {
             width: 500px;
             margin-left: 500px;
         }
 
-        #js_searchList {
-            height: 300px;
+        #js_productList {
+            max-height: 300px;
             background: #fff;
             overflow-y: auto;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -51,8 +52,8 @@
 
 <body>
     <form action="second.html">
-        <input id="js_search_input" type="text" oninput="inputValue()">
-        <div id="js_searchList"></div>
+        <input id="js_input" type="text" oninput="inputValue()">
+        <div id="js_productList"></div>
     </form>
 
     <script>
@@ -78,19 +79,19 @@
         ];
 
         function inputValue() {
-            let input = document.getElementById('js_search_input').value.toLowerCase();
-            let matchingProduct = document.getElementById('js_searchList');
+            let input = document.getElementById('js_input').value.toLowerCase();
+            let productList = document.getElementById('js_productList');
 
-            matchingProduct.innerHTML = '';
+            productList.innerHTML = '';
 
-            let productName = products.filter(product => product.productName.toLowerCase().includes(input));
+            let productName = products.filter(product => product.productName.toLowerCase().startsWith(input));
 
             let final = productName.forEach((item) => {
                 let p = document.createElement('p')
                 p.textContent = item.productName;
-                p.classList.add('js_matchedContent')
-                matchingProduct.appendChild(p);
-                document.getElementById('js_searchList').style.display = 'block';
+                p.classList.add('js_searchedContent')
+                productList.appendChild(p);
+                document.getElementById('js_productList').style.display = 'block';
             });
         }
 
