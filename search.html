@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: rgba(170, 168, 168, 0.325);
+        }
+
+        #js_search_input {
+            border-radius: 150px;
+            padding: 10px 20px;
+            margin-bottom: 8px;
+        }
+
+        .js_matchedContent {
+            border-bottom: 1px solid rgba(170, 168, 168, 0.325);
+            padding: 15px 5px;
+        }
+
+        .js_matchedContent:nth-last-child(1) {
+            border-bottom: 0;
+        }
+
+        #js_search_input,
+        #js_searchList {
+            width: 500px;
+            margin-left: 500px;
+        }
+
+        #js_searchList {
+            height: 300px;
+            background: #fff;
+            overflow-y: auto;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            border-radius: 8px;
+            padding: 0px 20px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="second.html">
+        <input id="js_search_input" type="text" oninput="inputValue()">
+        <div id="js_searchList"></div>
+    </form>
+
+    <script>
+        const products = [
+            { productName: 'Samsung Galaxy S21', price: 1099 },
+            { productName: 'Samsung Galaxy S22', price: 1199 },
+            { productName: 'Samsung Galaxy S23', price: 1299 },
+            { productName: 'Apple iPhone 13', price: 999 },
+            { productName: 'Apple iPhone 14', price: 1099 },
+            { productName: 'Apple iPhone 15', price: 1199 },
+            { productName: 'Google Pixel 6', price: 899 },
+            { productName: 'Google Pixel 7', price: 999 },
+            { productName: 'Google Pixel 8', price: 1099 },
+            { productName: 'Xiaomi Mi 11', price: 799 },
+            { productName: 'Xiaomi Mi 12', price: 899 },
+            { productName: 'Xiaomi Mi 13', price: 999 },
+            { productName: 'OnePlus 9', price: 899 },
+            { productName: 'OnePlus 10', price: 999 },
+            { productName: 'OnePlus 11', price: 1099 },
+            { productName: 'Huawei P40', price: 599 },
+            { productName: 'Huawei P50', price: 699 },
+            { productName: 'Huawei P60', price: 799 }
+        ];
+
+        function inputValue() {
+            let input = document.getElementById('js_search_input').value.toLowerCase();
+            let matchingProduct = document.getElementById('js_searchList');
+
+            matchingProduct.innerHTML = '';
+
+            let productName = products.filter(product => product.productName.toLowerCase().includes(input));
+
+            let final = productName.forEach((item) => {
+                let p = document.createElement('p')
+                p.textContent = item.productName;
+                p.classList.add('js_matchedContent')
+                matchingProduct.appendChild(p);
+                document.getElementById('js_searchList').style.display = 'block';
+            });
+        }
+
+    </script>
+</body>
+
+</html>
