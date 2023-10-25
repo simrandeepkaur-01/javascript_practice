@@ -51,7 +51,7 @@
 </head>
 
 <body>
-    <form action="second.html">
+    <form action="#">
         <input id="js_input" type="text" oninput="inputValue()">
         <div id="js_productList"></div>
     </form>
@@ -86,7 +86,7 @@
 
             let productName = products.filter(product => product.productName.toLowerCase().startsWith(input));
 
-            let final = productName.forEach((item) => {
+            productName.forEach((item) => {
                 let p = document.createElement('p')
                 p.textContent = item.productName;
                 p.classList.add('js_searchedContent')
