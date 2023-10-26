@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            border: 1px solid black;
+            width: 150px;
+            height: 150px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <div id="btn-box">
+
+        <button data-color="red">Click for Red Color</button>
+        <button data-color="blue">Click for Blue Color</button>
+        <button data-color="green">Click for Green Color</button>
+
+    </div>
+    <script>
+
+        const buttonBox = {
+            box: document.getElementById("box"),
+            color: "white",
+            render() {
+                box.style.backgroundColor = buttonBox.color;
+            },
+            bind() {
+                const buttonDiv = document.querySelectorAll('#btn-box button')
+                buttonDiv.forEach(btn => {
+                    btn.addEventListener('click', function (event) {
+                        buttonBox.color = btn.getAttribute('data-color')
+                        buttonBox.render();
+                    })
+                })
+            }
+        }
+        buttonBox.bind();
+    </script>
+</body>
+
+</html>

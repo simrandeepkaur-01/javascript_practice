@@ -25,11 +25,17 @@
 
         .js_searchedContent {
             border-bottom: 1px solid rgba(170, 168, 168, 0.325);
-            padding: 15px 5px;
+            padding: 15px 20px;
+            list-style: none;
         }
 
         .js_searchedContent:nth-last-child(1) {
             border-bottom: 0;
+        }
+
+        .js_searchedContent:hover {
+            background: rgba(185, 182, 182, 0.318);
+            cursor: pointer;
         }
 
         #js_input,
@@ -44,16 +50,15 @@
             overflow-y: auto;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             border-radius: 8px;
-            padding: 0px 20px;
-            display: none;
+            /* padding: 0px 20px; */
         }
     </style>
 </head>
 
 <body>
-    <form action="#">
-        <input id="js_input" type="text" oninput="inputValue()">
-        <div id="js_productList"></div>
+    <form action="#" autocomplete="off">
+        <input id="js_input" type="search" oninput="inputValue()" placeholder="Search Here...">
+        <ul id="js_productList"></ul>
     </form>
 
     <script>
@@ -79,19 +84,28 @@
         ];
 
         function inputValue() {
-            let input = document.getElementById('js_input').value.toLowerCase();
-            let productList = document.getElementById('js_productList');
+            let inputValue = document.getElementById('js_input').value.toLowerCase().trim();
+            let input = document.getElementById('js_input');
 
+            let productList = document.getElementById('js_productList');
             productList.innerHTML = '';
 
-            let productName = products.filter(product => product.productName.toLowerCase().startsWith(input));
+            let productName = products.filter(product => product.productName.toLowerCase().trim().startsWith(inputValue));
+
+            if (inputValue === '') {
+                return;
+            }
 
             productName.forEach((item) => {
-                let p = document.createElement('p')
-                p.textContent = item.productName;
-                p.classList.add('js_searchedContent')
-                productList.appendChild(p);
-                document.getElementById('js_productList').style.display = 'block';
+                let li = document.createElement('li');
+                li.textContent = item.productName;
+                li.classList.add('js_searchedContent');
+                productList.appendChild(li);
+
+                //Show productName in searchBar on selection of product-name from searched list.
+                li.addEventListener('click', function () {
+                    input.value = li.textContent;
+                })
             });
         }
 
