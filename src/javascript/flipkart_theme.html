@@ -17,7 +17,7 @@
 
         // nav
         let nav = document.createElement('nav');
-        nav.setAttribute('class', 'h-16 bg-[#2370f4] flex items-center dark:bg-indigo-800')
+        nav.setAttribute('class', 'h-16 bg-[#2370f4] flex items-center dark:bg-indigo-800 ')
 
         // nav-div for logo
         let div = document.createElement('div');
@@ -60,7 +60,7 @@
         let input = document.createElement('input');
         let inputAttributes = {
             id: "js_input",
-            class: "mx-auto w-full rounded-full p-1.5 px-3  dark:bg-gray-200 ",
+            class: "mx-auto w-full rounded-full p-1.5 px-3  dark:bg-gray-300 dark:placeholder:text-gray-700 ",
             type: "search",
             oninput: "inputValue()",
             placeholder: "Search Here..."
@@ -84,11 +84,17 @@
             ul.setAttribute(key, ulAtttributes[key]);
         }
 
-        // svg light
-        let theme = document.createElement('button');
-        theme.innerHTML = `<svg class="w-6 h-6 text-white ml-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M14 2C 9 2 3 7 3 15 3 23 9 29 17 29 25 29 30 23 30 18 19 25 7 13 14 2Z"></path></svg>`;
-        theme.setAttribute('type', 'button');
-        theme.setAttribute('aria-label', 'switch to dark theme');
+        // Theme toggle button
+        let themeBtn = document.createElement('button');
+        themeBtn.innerHTML = `<svg class="w-6 h-6  text-white " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M14 2C 9 2 3 7 3 15 3 23 9 29 17 29 25 29 30 23 30 18 19 25 7 13 14 2Z"></path></svg>`;
+        let themeBtnAttributes = {
+            type: 'button',
+            class: 'ml-10',
+            'aria-label': 'switch to dark themeBtn',
+        }
+        for (let key in themeBtnAttributes) {
+            themeBtn.setAttribute(key, themeBtnAttributes[key]);
+        }
 
         //append elements
         nav.appendChild(div);
@@ -101,16 +107,24 @@
         formDiv.appendChild(input);
         formDiv.appendChild(svgSearch);
         form.appendChild(ul);
-        nav.appendChild(theme);
+        nav.appendChild(themeBtn);
         header.appendChild(nav);
 
         // body
         document.body.setAttribute('class', 'bg-[#e9effa] dark:bg-gray-800')
         document.body.appendChild(header);
 
-        // change theme on toggle 
-        theme.addEventListener('click', function () {
-            document.querySelector('html').classList.toggle('dark');
+        // change themeBtn on toggle 
+        themeBtn.addEventListener('click', function () {
+            let html = document.querySelector('html');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                themeBtn.innerHTML = `<svg class="w-6 h-6  text-white " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M14 2C 9 2 3 7 3 15 3 23 9 29 17 29 25 29 30 23 30 18 19 25 7 13 14 2Z"></path></svg>`;
+            }
+            else {
+                html.classList.add('dark');
+                themeBtn.innerHTML = `<svg class="w-6 h-6 text-gray-300  " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+            }
         })
 
         // searchBar functionality
@@ -151,7 +165,7 @@
 
             productName.forEach((item) => {
                 let li = document.createElement('li');
-                li.setAttribute('class', 'py-2 px-2.5 flex items-center border-b hover:bg-[#f2f5fa] dark:hover:bg-gray-300 dark:border-b dark:border-gray-300');
+                li.setAttribute('class', 'py-2 px-2.5 flex items-center border-b hover:bg-[#f2f5fa] dark:bg-gray-300 dark:hover:bg-slate-200 dark:border-b dark:border-gray-200');
 
                 // creating <img> for product-image
                 let img = document.createElement('img');
@@ -160,9 +174,10 @@
                 li.appendChild(img);
 
                 // span for productName
-                let span = document.createElement('span');
-                span.textContent = item.productName;
-                li.appendChild(span);
+                let a = document.createElement('a');
+                a.textContent = item.productName;
+                a.setAttribute('href', '#');
+                li.appendChild(a);
 
                 productList.appendChild(li);
 
