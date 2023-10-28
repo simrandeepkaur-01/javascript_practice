@@ -149,7 +149,6 @@
             { productName: 'Huawei P60', price: 799, src: 'https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/y/9/g/-original-imagnfzyhh8gz8sd.jpeg?q=70' }
         ];
 
-
         function inputValue() {
             let inputValue = document.getElementById('js_input').value.toLowerCase().trim();
             let input = document.getElementById('js_input');
@@ -187,6 +186,138 @@
                 })
             });
         }
+
+        // *********************************************************************** ToDo List ******************************************************************************
+
+        // main
+        let main = document.createElement('main');
+        // main.setAttribute('class','')
+
+        //todo form
+        let toDoForm = document.createElement('form');
+        toDoForm.setAttribute('class', 'flex items-center justify-center relative mt-20');
+        toDoForm.setAttribute('action', '#');
+
+        // toDo Input
+        let toDoInput = document.createElement('input');
+        let toDoInputAttributes = {
+            type: 'text',
+            id: 'js_toDoInput',
+            class: 'w-[450px] rounded-l-full px-3 p-2 ring-1 ring-gray-400',
+            placeholder: 'Enter your task Name',
+            autocomplete: 'off'
+        }
+        for (let key in toDoInputAttributes) {
+            toDoInput.setAttribute(key, toDoInputAttributes[key]);
+        }
+
+        // toDo input submit
+        let toDoInputSubmit = document.createElement('button');
+        toDoInputSubmit.textContent = 'Add';
+
+        let toDoInputSubmitAttributes = {
+            type: 'submit',
+            value: 'Add your Task Name',
+            class: 'bg-gray-500 text-white px-6 p-[9px] rounded-r-full ',
+            id: 'js_addBtnToDo'
+        }
+        for (let key in toDoInputSubmitAttributes) {
+            toDoInputSubmit.setAttribute(key, toDoInputSubmitAttributes[key]);
+        }
+
+        //table
+        let toDoTable = document.createElement('table');
+        toDoTable.setAttribute('class', 'flex justify-between mx-auto  w-[520px] max-h-96 bg-white dark:bg-gray-200 overflow-y-auto rounded-lg mt-2');
+        toDoTable.setAttribute('style', 'box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)')
+        let toDoTableTbody = document.createElement('tbody');
+        toDoTableTbody.setAttribute('class','w-full divide-y divide-gray-200')
+
+        document.body.appendChild(main);
+        main.appendChild(toDoForm);
+        toDoForm.appendChild(toDoInput);
+        toDoForm.appendChild(toDoInputSubmit);
+        main.appendChild(toDoTable);
+        toDoTable.appendChild(toDoTableTbody);
+
+        // toDo functionality
+        let toDoInputGet = document.getElementById('js_toDoInput');
+        let toDoAddBtn = document.getElementById('js_addBtnToDo');
+
+        toDoAddBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            if (toDoInputGet.value === '') {
+                alert('Enter Your Task Name');
+                return;
+            }
+
+            // todo Table-Row
+            let toDoTableRow = document.createElement('tr');
+            toDoTableRow.setAttribute('class','flex justify-between p-2.5  hover:bg-[#f2f5fa] dark:bg-gray-300 dark:hover:bg-slate-200');
+
+            // todo Table-data
+            let toDoTableData = document.createElement('td');
+            toDoTableData.setAttribute('class','flex justify-between w-full')
+            let toDoTableDataSpan = document.createElement('span');
+            toDoTableDataSpan.textContent = toDoInputGet.value;
+
+            //toDo buttons div
+            let toDoBtnDiv = document.createElement('div');
+
+            // todo Table-data complete button
+            let toDoCompleteBtn = document.createElement('button');
+            toDoCompleteBtn.textContent = 'Complete';
+            let toDoCompleteBtnAttributes = {
+                type: 'button',
+                value: 'complete/incomplete',
+                class: 'border border-gray-500 px-3 py-0.5 rounded-lg !mr-3',
+                id: 'js_completeBtn'
+            }
+            for (let key in toDoCompleteBtnAttributes) {
+                toDoCompleteBtn.setAttribute(key, toDoCompleteBtnAttributes[key]);
+            }
+
+            // todo Table-data delete button
+            let toDoDeleteBtn = document.createElement('button');
+            toDoDeleteBtn.textContent = 'Delete';
+            let toDoDeleteBtnAttributes = {
+                type: 'button',
+                value: 'delete',
+                class: 'border border-gray-500 px-3 py-0.5 rounded-lg !mr-3',
+                id: 'js_deleteBtn'
+            }
+            for (let key in toDoDeleteBtnAttributes) {
+                toDoDeleteBtn.setAttribute(key, toDoDeleteBtnAttributes[key]);
+            }
+
+            // Line-through on TaskName on click Complete button and Remove Line-through on click on Incomplete
+            toDoCompleteBtn.addEventListener('click', function () {
+                if (toDoCompleteBtn.matches('#js_completeBtn')) {
+                    toDoTableDataSpan.style.textDecoration = 'line-through';
+                    toDoCompleteBtn.textContent = 'Incomplete';
+                    toDoCompleteBtn.setAttribute('id', 'js_incompleteBtn');
+                } else if (toDoCompleteBtn.matches('#js_incompleteBtn')) {
+                    toDoTableDataSpan.style.textDecoration = 'none';
+                    toDoCompleteBtn.textContent = 'Complete';
+                    toDoCompleteBtn.setAttribute('id', 'js_completeBtn');
+                }
+            })
+
+            // Remove Table Row on Click on Delete Button
+            toDoDeleteBtn.addEventListener('click', function () {
+                toDoTableRow.remove();
+            })
+
+            //toDo AppendChild
+            toDoTableTbody.appendChild(toDoTableRow);
+            toDoTableRow.appendChild(toDoTableData);
+            toDoTableRow.appendChild(toDoTableData);
+            toDoTableData.appendChild(toDoTableDataSpan);
+            toDoTableData.appendChild(toDoBtnDiv);
+            toDoBtnDiv.appendChild(toDoCompleteBtn);
+            toDoBtnDiv.appendChild(toDoDeleteBtn);
+
+            toDoInputGet.value = '';
+        });
 
     </script>
 
