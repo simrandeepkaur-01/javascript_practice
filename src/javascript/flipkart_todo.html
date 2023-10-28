@@ -111,7 +111,7 @@
         header.appendChild(nav);
 
         // body
-        document.body.setAttribute('class', 'bg-[#e9effa] dark:bg-gray-800')
+        document.body.setAttribute('class', 'bg-[#e9effa] dark:bg-gray-700')
         document.body.appendChild(header);
 
         // change themeBtn on toggle 
@@ -195,7 +195,7 @@
 
         //todo form
         let toDoForm = document.createElement('form');
-        toDoForm.setAttribute('class', 'flex items-center justify-center relative mt-20');
+        toDoForm.setAttribute('class', 'flex items-center justify-center  mt-20');
         toDoForm.setAttribute('action', '#');
 
         // toDo Input
@@ -203,7 +203,7 @@
         let toDoInputAttributes = {
             type: 'text',
             id: 'js_toDoInput',
-            class: 'w-[450px] rounded-l-full px-3 p-2 ring-1 ring-gray-400',
+            class: 'w-[450px] rounded-l-full px-3 p-2 ring-1 ring-gray-400 dark:bg-gray-300 dark:placeholder:text-gray-700',
             placeholder: 'Enter your task Name',
             autocomplete: 'off'
         }
@@ -218,7 +218,7 @@
         let toDoInputSubmitAttributes = {
             type: 'submit',
             value: 'Add your Task Name',
-            class: 'bg-gray-500 text-white px-6 p-[9px] rounded-r-full ',
+            class: 'text-white px-6 p-[9px] rounded-r-full bg-gray-600',
             id: 'js_addBtnToDo'
         }
         for (let key in toDoInputSubmitAttributes) {
