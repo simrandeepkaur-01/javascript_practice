@@ -218,7 +218,7 @@
         let toDoInputSubmitAttributes = {
             type: 'submit',
             value: 'Add your Task Name',
-            class: 'text-white px-6 p-[9px] rounded-r-full bg-gray-600',
+            class: 'text-white px-6 p-[9px] rounded-r-full bg-gray-500 dark:bg-gray-900',
             id: 'js_addBtnToDo'
         }
         for (let key in toDoInputSubmitAttributes) {
@@ -259,6 +259,7 @@
             toDoTableData.setAttribute('class','flex justify-between w-full')
             let toDoTableDataSpan = document.createElement('span');
             toDoTableDataSpan.textContent = toDoInputGet.value;
+            toDoTableDataSpan.setAttribute('class','w-72 truncate');
 
             //toDo buttons div
             let toDoBtnDiv = document.createElement('div');
@@ -269,7 +270,7 @@
             let toDoCompleteBtnAttributes = {
                 type: 'button',
                 value: 'complete/incomplete',
-                class: 'border border-gray-500 px-3 py-0.5 rounded-lg !mr-3',
+                class: 'border border-gray-500 px-3 py-0.5 rounded-lg !mr-3 bg-gray-500 text-white dark:bg-gray-800',
                 id: 'js_completeBtn'
             }
             for (let key in toDoCompleteBtnAttributes) {
@@ -282,7 +283,7 @@
             let toDoDeleteBtnAttributes = {
                 type: 'button',
                 value: 'delete',
-                class: 'border border-gray-500 px-3 py-0.5 rounded-lg !mr-3',
+                class: 'border border-gray-500 px-3 py-0.5 rounded-lg !mr-3 bg-red-500 text-white',
                 id: 'js_deleteBtn'
             }
             for (let key in toDoDeleteBtnAttributes) {
@@ -292,11 +293,11 @@
             // Line-through on TaskName on click Complete button and Remove Line-through on click on Incomplete
             toDoCompleteBtn.addEventListener('click', function () {
                 if (toDoCompleteBtn.matches('#js_completeBtn')) {
-                    toDoTableDataSpan.style.textDecoration = 'line-through';
+                    toDoTableDataSpan.setAttribute('class','line-through w-72 truncate');
                     toDoCompleteBtn.textContent = 'Incomplete';
                     toDoCompleteBtn.setAttribute('id', 'js_incompleteBtn');
                 } else if (toDoCompleteBtn.matches('#js_incompleteBtn')) {
-                    toDoTableDataSpan.style.textDecoration = 'none';
+                    toDoTableDataSpan.setAttribute('class','no-underline w-72 truncate');
                     toDoCompleteBtn.textContent = 'Complete';
                     toDoCompleteBtn.setAttribute('id', 'js_completeBtn');
                 }
