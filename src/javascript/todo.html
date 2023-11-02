@@ -164,10 +164,10 @@
 
         function renderToDo(taskObj) {
             let toDoTableRow = createNewElement('tr', 'js_toDoTableRow', 'flex justify-between p-2.5  hover:bg-[#f2f5fa] dark:bg-gray-300 dark:hover:bg-slate-200')
-            // toDoTableTbody.appendChild(toDoTableRow);
+            toDoTableTbody.appendChild(toDoTableRow);
 
             let toDoTableData = createNewElement('td', null, 'flex justify-between w-full');
-            // toDoTableRow.appendChild(toDoTableData);
+            toDoTableRow.appendChild(toDoTableData);
 
             let toDoTableDataSpan = createNewElement('span', 'js_taskName', 'w-64 truncate');
             toDoTableDataSpan.textContent = taskObj.taskName;
@@ -182,8 +182,8 @@
             let toDoDeleteBtn = createButton('button', 'js_deleteBtn', 'px-3 py-0.5 rounded-lg bg-red-500 text-white', 'Delete', 'button', 'delete');
             toDoDeleteBtn.setAttribute('data-key', taskObj.dateId);
 
-            // toDoBtnDiv.append(toDoCompleteBtn, toDoDeleteBtn);
-            // toDoTableData.append(toDoTableDataSpan, toDoBtnDiv);
+            toDoBtnDiv.append(toDoCompleteBtn, toDoDeleteBtn);
+            toDoTableData.append(toDoTableDataSpan, toDoBtnDiv);
 
             //Removing task from ToDo list
             toDoDeleteBtn.addEventListener('click', function (e) {
@@ -217,10 +217,7 @@
 
                 toDoTableDataSpan.classList.toggle('line-through');
             })
-            toDoTableTbody.appendChild(toDoTableRow);
-            toDoTableRow.appendChild(toDoTableData);
-            toDoBtnDiv.append(toDoCompleteBtn, toDoDeleteBtn);
-            toDoTableData.append(toDoTableDataSpan, toDoBtnDiv);
+
         }
 
         function saveData() {
