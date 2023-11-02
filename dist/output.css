@@ -788,6 +788,11 @@ input[type="search"]::-webkit-search-decoration,
   margin-bottom: 0.375rem;
 }
 
+.my-10 {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
 .my-6 {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
@@ -798,17 +803,16 @@ input[type="search"]::-webkit-search-decoration,
   margin-bottom: auto;
 }
 
-.my-10 {
-  margin-top: 2.5rem;
-  margin-bottom: 2.5rem;
-}
-
 .\!mr-3 {
   margin-right: 0.75rem !important;
 }
 
 .\!mr-4 {
   margin-right: 1rem !important;
+}
+
+.mb-5 {
+  margin-bottom: 1.25rem;
 }
 
 .mb-8 {
@@ -947,12 +951,16 @@ input[type="search"]::-webkit-search-decoration,
   margin-top: auto;
 }
 
-.mb-5 {
-  margin-bottom: 1.25rem;
+.ml-\[\] {
+  margin-left: ;
 }
 
-.ml-\[281px\] {
-  margin-left: 281px;
+.ml-\[50px\] {
+  margin-left: 50px;
+}
+
+.mt-0 {
+  margin-top: 0px;
 }
 
 .box-border {
@@ -1090,12 +1098,12 @@ input[type="search"]::-webkit-search-decoration,
   height: 2rem;
 }
 
-.h-screen {
-  height: 100vh;
-}
-
 .h-full {
   height: 100%;
+}
+
+.h-screen {
+  height: 100vh;
 }
 
 .max-h-80 {
@@ -1116,6 +1124,10 @@ input[type="search"]::-webkit-search-decoration,
 
 .w-20 {
   width: 5rem;
+}
+
+.w-24 {
+  width: 6rem;
 }
 
 .w-3 {
@@ -1194,12 +1206,28 @@ input[type="search"]::-webkit-search-decoration,
   width: 100vw;
 }
 
-.w-2\/4 {
+.w-1\/2 {
   width: 50%;
 }
 
-.w-24 {
-  width: 6rem;
+.w-1 {
+  width: 0.25rem;
+}
+
+.w-2\/5 {
+  width: 40%;
+}
+
+.w-3\/5 {
+  width: 60%;
+}
+
+.w-1\/5 {
+  width: 20%;
+}
+
+.max-w-3xl {
+  max-width: 48rem;
 }
 
 .max-w-none {
@@ -1208,10 +1236,6 @@ input[type="search"]::-webkit-search-decoration,
 
 .max-w-prose {
   max-width: 65ch;
-}
-
-.max-w-3xl {
-  max-width: 48rem;
 }
 
 .flex-shrink {
@@ -1846,6 +1870,42 @@ input[type="search"]::-webkit-search-decoration,
   margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
+.space-x-96 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(24rem * var(--tw-space-x-reverse));
+  margin-left: calc(24rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-x-44 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(11rem * var(--tw-space-x-reverse));
+  margin-left: calc(11rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-x-32 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(8rem * var(--tw-space-x-reverse));
+  margin-left: calc(8rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-x-28 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(7rem * var(--tw-space-x-reverse));
+  margin-left: calc(7rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-x-20 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(5rem * var(--tw-space-x-reverse));
+  margin-left: calc(5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-x-12 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(3rem * var(--tw-space-x-reverse));
+  margin-left: calc(3rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
 .space-y-reverse > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 1;
 }
@@ -2478,14 +2538,14 @@ input[type="search"]::-webkit-search-decoration,
   background-color: rgb(153 27 27 / var(--tw-bg-opacity));
 }
 
-.bg-white {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
 .bg-red-900 {
   --tw-bg-opacity: 1;
   background-color: rgb(127 29 29 / var(--tw-bg-opacity));
+}
+
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
 .bg-none {
@@ -2662,6 +2722,11 @@ input[type="search"]::-webkit-search-decoration,
   padding: 9px;
 }
 
+.px-10 {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -2707,11 +2772,6 @@ input[type="search"]::-webkit-search-decoration,
   padding-bottom: 0.5rem;
 }
 
-.px-10 {
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
-}
-
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -2719,6 +2779,38 @@ input[type="search"]::-webkit-search-decoration,
 
 .pt-20 {
   padding-top: 5rem;
+}
+
+.pl-\[50px\] {
+  padding-left: 50px;
+}
+
+.pl-\[0px\] {
+  padding-left: 0px;
+}
+
+.pl-\[80px\] {
+  padding-left: 80px;
+}
+
+.pl-\[100px\] {
+  padding-left: 100px;
+}
+
+.pl-\[300px\] {
+  padding-left: 300px;
+}
+
+.pl-\[250px\] {
+  padding-left: 250px;
+}
+
+.pl-\[200px\] {
+  padding-left: 200px;
+}
+
+.pl-\[240px\] {
+  padding-left: 240px;
 }
 
 .text-left {

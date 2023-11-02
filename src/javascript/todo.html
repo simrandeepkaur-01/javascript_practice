@@ -4,9 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="Flipkart, header, Search Products, to-do list,add tasks">
-    <meta name="description"
-        content="Explore the Flipkart header with a Search Product feature and a to-do list. Find and organize your tasks seamlessly.">
+    <meta name="keywords" content="to-do list,add tasks,task management">
+    <meta name="description" content="To-do list for task management and organization.">
     <title>To-do List</title>
     <link rel="stylesheet" href="../../dist/output.css">
 </head>
@@ -24,13 +23,11 @@
 
         let main = document.createElement('main');
         document.body.appendChild(main);
-        document.body.className = 'bg-[#e9effa] dark:bg-gray-700';
+        document.body.className = 'bg-[#e9effa]';
 
-        let mainDiv = createNewElement('div', 'js_mainDiv', 'flex items-center justify-center w-8/12 mx-auto justify-between  pt-20',);
-
-        let form = document.createElement('form');
+        let form = createNewElement('form', 'js_toDoAddTask', 'w-1/2 float-left pl-[240px] mt-0');
         form.action = '#';
-        mainDiv.appendChild(form);
+        main.appendChild(form);
 
         function createInput(element, type, id = null, className = null, placeholder = null, autocomplete = 'off') {
             let elem = document.createElement(element);
@@ -52,21 +49,13 @@
             elem.value = value;
             return elem;
         }
+
         let toDoInputSubmit = createButton('button', 'js_addBtnToDo', 'text-white px-6 p-[9px] rounded-r-full bg-gray-500 dark:bg-gray-900', 'Add', 'submit', 'Add your Task Name');
         form.append(toDoInput, toDoInputSubmit);
 
-        // table
-        let toDoTable = createNewElement('table', 'js_table', 'flex justify-between mx-auto w-[520px] max-h-96 bg-white dark:bg-gray-200 overflow-y-auto rounded-lg mt-14');
-        toDoTable.style = 'box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)';
-        main.append(mainDiv, toDoTable);
-
-        let toDoTableTbody = document.createElement('tbody');
-        toDoTableTbody.className = 'w-full divide-y divide-gray-200';
-        toDoTable.appendChild(toDoTableTbody);
-
         // search task and filter container
-        let searchAndFilterContainer = createNewElement('div', 'js_search-filterDiv', 'flex justify-between w-[45%]');
-        mainDiv.appendChild(searchAndFilterContainer);
+        let searchAndFilterContainer = createNewElement('div', 'js_search-filterDiv', 'flex justify-center space-x-12 w-1/2 mt-20');
+        main.appendChild(searchAndFilterContainer);
 
         let toDoSearch = createInput('input', 'search', 'js_toDoSearchTask', 'rounded-lg p-1.5 px-3 w-80 dark:bg-gray-300 bg-white dark:placeholder:text-gray-700', 'Search For Task Here...');
         toDoSearch.setAttribute('oninput', "searchTask()");
@@ -88,6 +77,14 @@
 
         toDoSelect.append(toDoSelectAll, toDoSelectComplete, toDoSelectInProgress);
 
+        // table
+        let toDoTable = createNewElement('table', 'js_table', 'flex justify-between mx-auto w-[520px] max-h-96 bg-white dark:bg-gray-200 overflow-y-auto rounded-lg mt-14');
+        toDoTable.style = 'box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)';
+        main.appendChild(toDoTable);
+
+        let toDoTableTbody = document.createElement('tbody');
+        toDoTableTbody.className = 'w-full divide-y divide-gray-200';
+        toDoTable.appendChild(toDoTableTbody);
 
         // toDo functionality
         let toDoInputGet = document.getElementById('js_toDoInput');
@@ -164,7 +161,9 @@
 
         function renderToDo(taskObj) {
             let toDoTableRow = createNewElement('tr', 'js_toDoTableRow', 'flex justify-between p-2.5  hover:bg-[#f2f5fa] dark:bg-gray-300 dark:hover:bg-slate-200')
-            toDoTableTbody.appendChild(toDoTableRow);
+            let firstRow = toDoTableTbody.firstElementChild;
+
+            firstRow ? toDoTableTbody.insertBefore(toDoTableRow, firstRow) : toDoTableTbody.appendChild(toDoTableRow);
 
             let toDoTableData = createNewElement('td', null, 'flex justify-between w-full');
             toDoTableRow.appendChild(toDoTableData);
@@ -174,11 +173,9 @@
 
             let toDoBtnDiv = document.createElement('div');
 
-            // todo Table-data complete button
             let toDoCompleteBtn = createButton('button', 'js_completeBtn', 'px-3 py-0.5 rounded-lg !mr-3 bg-gray-500 text-white', 'Complete', 'button', 'complete/incomplete');
             taskObj.complete ? toDoCompleteBtn.className = 'px-3 py-0.5 rounded-lg !mr-3 bg-green-700 text-white' : toDoCompleteBtn.className = 'px-3 py-0.5 rounded-lg !mr-3 bg-gray-500 text-white';
 
-            // todo Table-data delete button
             let toDoDeleteBtn = createButton('button', 'js_deleteBtn', 'px-3 py-0.5 rounded-lg bg-red-500 text-white', 'Delete', 'button', 'delete');
             toDoDeleteBtn.setAttribute('data-key', taskObj.dateId);
 
@@ -196,7 +193,6 @@
                 }
             })
 
-            // setting complete button text
             toDoCompleteBtn.textContent = taskObj.complete ? 'Completed' : 'Incomplete';
 
             if (taskObj.complete) {
