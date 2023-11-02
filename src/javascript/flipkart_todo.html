@@ -17,57 +17,47 @@
 
         // nav
         let nav = document.createElement('nav');
-        nav.setAttribute('class', 'h-16 bg-[#2370f4] flex items-center dark:bg-indigo-800 ')
+        nav.className = 'h-16 bg-[#2370f4] flex items-center dark:bg-indigo-800';
 
         // nav-div for logo
         let div = document.createElement('div');
-        div.setAttribute('class', 'flex flex-col mr-20 ml-48');
+        div.className = 'flex flex-col mr-20 ml-48';
 
         // logo-image (Flipkart)
         let logoImg = document.createElement('img');
-        let logoImgAttributes = {
-            width: "75",
-            src: "	https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/flipkart-plus_8d85f4.png",
-            alt: "Flipkart",
-            title: "Flipkart"
-        }
-        for (let key in logoImgAttributes) {
-            logoImg.setAttribute(key, logoImgAttributes[key]);
-        }
+        logoImg.width = "75";
+        logoImg.src = "	https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/flipkart-plus_8d85f4.png";
+        logoImg.alt = "Flipkart";
+        logoImg.title = "Flipkart";
 
         // logo (Explore)
         let logoExplore = document.createElement('a');
         logoExplore.textContent = 'Explore ';
-        logoExplore.setAttribute('class', 'text-white italic flex w-4 h-4 items-center space-x-1')
+        logoExplore.className = 'text-white italic flex w-4 h-4 items-center space-x-1';
 
         let logoSpan = document.createElement('span');
         logoSpan.textContent = 'Plus';
-        logoSpan.setAttribute('class', 'text-[#ffe11b] ml-0.5')
+        logoSpan.className = 'text-[#ffe11b] ml-0.5';
 
         let logoExploreImg = document.createElement('img');
-        logoExploreImg.setAttribute('src', 'https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/plus_aef861.png');
+        logoExploreImg.src = 'https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/plus_aef861.png';
 
         // nav-form
         let form = document.createElement('form');
-        form.setAttribute('action', '#');
-        form.setAttribute('autocomplete', 'off');
+        form.action = '#';
+        form.autocomplete = 'off';
 
         // nav-form-div
         let formDiv = document.createElement('div');
-        formDiv.setAttribute('class', 'w-[500px] relative my-1.5 mx-auto');
+        formDiv.className = 'w-[500px] relative my-1.5 mx-auto';
 
         // nav-form-div-input
         let input = document.createElement('input');
-        let inputAttributes = {
-            id: "js_input",
-            class: "mx-auto w-full rounded-full p-1.5 px-3  dark:bg-gray-300 dark:placeholder:text-gray-700 ",
-            type: "search",
-            oninput: "inputValue()",
-            placeholder: "Search Here..."
-        }
-        for (let key in inputAttributes) {
-            input.setAttribute(key, inputAttributes[key]);
-        }
+        input.id = "js_input";
+        input.className = "mx-auto w-full rounded-full p-1.5 px-3  dark:bg-gray-300 dark:placeholder:text-gray-700 ";
+        input.type = "search";
+        input.setAttribute('oninput', 'inputValue()');
+        input.placeholder = "Search For Your Smart Phone Here...";
 
         // form-div-svg for search
         let svgSearch = document.createElement('span');
@@ -75,26 +65,16 @@
 
         // form-ul
         let ul = document.createElement('ul');
-        let ulAtttributes = {
-            id: 'js_productList',
-            class: 'mx-auto w-[500px] max-h-80	bg-white dark:bg-gray-200 overflow-y-auto rounded-lg absolute',
-            style: 'box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'
-        };
-        for (let key in ulAtttributes) {
-            ul.setAttribute(key, ulAtttributes[key]);
-        }
+        ul.id = 'js_productList';
+        ul.className = 'mx-auto w-[500px] max-h-80	bg-white dark:bg-gray-200 overflow-y-auto rounded-lg absolute';
+        ul.style = 'box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)';
 
         // Theme toggle button
         let themeBtn = document.createElement('button');
         themeBtn.innerHTML = `<svg class="w-6 h-6  text-white " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M14 2C 9 2 3 7 3 15 3 23 9 29 17 29 25 29 30 23 30 18 19 25 7 13 14 2Z"></path></svg>`;
-        let themeBtnAttributes = {
-            type: 'button',
-            class: 'ml-10',
-            'aria-label': 'switch to dark themeBtn',
-        }
-        for (let key in themeBtnAttributes) {
-            themeBtn.setAttribute(key, themeBtnAttributes[key]);
-        }
+        themeBtn.type = 'button';
+        themeBtn.className = 'ml-10';
+        themeBtn.setAttribute('aria-label', 'switch to dark themeBtn');
 
         //append elements
         nav.appendChild(div);
@@ -111,11 +91,12 @@
         header.appendChild(nav);
 
         // body
-        document.body.setAttribute('class', 'bg-[#e9effa] dark:bg-gray-700')
+        document.body.className = 'bg-[#e9effa] dark:bg-gray-700';
         document.body.appendChild(header);
 
         // change themeBtn on toggle 
-        themeBtn.addEventListener('click', function () {
+        themeBtn.addEventListener('click', function (e) {
+            e.preventDefault();
             let html = document.querySelector('html');
             if (html.classList.contains('dark')) {
                 html.classList.remove('dark');
@@ -164,24 +145,25 @@
 
             productName.forEach((item) => {
                 let li = document.createElement('li');
-                li.setAttribute('class', 'py-2 px-2.5 flex items-center border-b hover:bg-[#f2f5fa] dark:bg-gray-300 dark:hover:bg-slate-200 dark:border-b dark:border-gray-200');
+                li.className = 'py-2 px-2.5 flex items-center border-b hover:bg-[#f2f5fa] dark:bg-gray-300 dark:hover:bg-slate-200 dark:border-b dark:border-gray-200';
 
                 // creating <img> for product-image
                 let img = document.createElement('img');
-                img.setAttribute('src', item.src);
-                img.setAttribute('class', 'mr-2 h-11 w-9');
+                img.src = item.src;
+                img.className = 'mr-2 h-11 w-9';
                 li.appendChild(img);
 
                 // span for productName
                 let a = document.createElement('a');
                 a.textContent = item.productName;
-                a.setAttribute('href', '#');
+                a.href = '#';
                 li.appendChild(a);
 
                 productList.appendChild(li);
 
                 //Show productName in searchBar on selection of product-name from searched list.
-                li.addEventListener('click', function () {
+                li.addEventListener('click', function (e) {
+                    e.preventDefault();
                     input.value = li.textContent;
                 })
             });
@@ -191,75 +173,179 @@
 
         // main
         let main = document.createElement('main');
-        // main.setAttribute('class','')
 
         //todo form
         let toDoForm = document.createElement('form');
-        toDoForm.setAttribute('class', 'flex items-center justify-center  mt-20');
-        toDoForm.setAttribute('action', '#');
+        toDoForm.className = 'flex items-center justify-center w-8/12 mx-auto justify-between  mt-20';
+        toDoForm.action = '#';
+
+        //input and submit button container div.
+        let toDoFormInputDiv = document.createElement('div');
 
         // toDo Input
         let toDoInput = document.createElement('input');
-        let toDoInputAttributes = {
-            type: 'text',
-            id: 'js_toDoInput',
-            class: 'w-[450px] rounded-l-full px-3 p-2 ring-1 ring-gray-400 dark:bg-gray-300 dark:placeholder:text-gray-700',
-            placeholder: 'Enter your task Name',
-            autocomplete: 'off'
-        }
-        for (let key in toDoInputAttributes) {
-            toDoInput.setAttribute(key, toDoInputAttributes[key]);
-        }
+        toDoInput.type = 'text';
+        toDoInput.id = 'js_toDoInput';
+        toDoInput.className = 'w-[400px] rounded-l-full px-3 p-2 ring-1 ring-gray-400 dark:bg-gray-300 dark:placeholder:text-gray-700';
+        toDoInput.placeholder = 'Enter your task Name';
+        toDoInput.autocomplete = 'off';
 
         // toDo input submit
         let toDoInputSubmit = document.createElement('button');
         toDoInputSubmit.textContent = 'Add';
-
-        let toDoInputSubmitAttributes = {
-            type: 'submit',
-            value: 'Add your Task Name',
-            class: 'text-white px-6 p-[9px] rounded-r-full bg-gray-500 dark:bg-gray-900',
-            id: 'js_addBtnToDo'
-        }
-        for (let key in toDoInputSubmitAttributes) {
-            toDoInputSubmit.setAttribute(key, toDoInputSubmitAttributes[key]);
-        }
+        toDoInputSubmit.type = 'submit';
+        toDoInputSubmit.value = 'Add your Task Name';
+        toDoInputSubmit.className = 'text-white px-6 p-[9px] rounded-r-full bg-gray-500 dark:bg-gray-900';
+        toDoInputSubmit.id = 'js_addBtnToDo';
 
         //table
         let toDoTable = document.createElement('table');
-        toDoTable.setAttribute('class', 'flex justify-between mx-auto  w-[520px] max-h-96 bg-white dark:bg-gray-200 overflow-y-auto rounded-lg mt-2');
-        toDoTable.setAttribute('style', 'box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)')
+        toDoTable.className = 'flex justify-between mx-auto  w-[520px] max-h-96 bg-white dark:bg-gray-200 overflow-y-auto rounded-lg mt-14';
+        toDoTable.style = 'box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)';
         let toDoTableTbody = document.createElement('tbody');
-        toDoTableTbody.setAttribute('class','w-full divide-y divide-gray-200')
+        toDoTableTbody.className = 'w-full divide-y divide-gray-200';
 
         document.body.appendChild(main);
         main.appendChild(toDoForm);
-        toDoForm.appendChild(toDoInput);
-        toDoForm.appendChild(toDoInputSubmit);
+        toDoForm.appendChild(toDoFormInputDiv);
+        toDoFormInputDiv.appendChild(toDoInput);
+        toDoFormInputDiv.appendChild(toDoInputSubmit);
         main.appendChild(toDoTable);
         toDoTable.appendChild(toDoTableTbody);
+
+        // search task and filter container
+        let toDoSearchAndFilterDiv = document.createElement('div');
+        toDoSearchAndFilterDiv.className = 'flex justify-between w-[45%]'
+
+        // search for task
+        let toDoSearch = document.createElement('input');
+        toDoSearch.id = "js_toDoSearchTask";
+        toDoSearch.className = "rounded-lg p-1.5 px-3 w-80 dark:bg-gray-300 bg-white dark:placeholder:text-gray-700 ";
+        toDoSearch.type = "search";
+        toDoSearch.autocomplete = "off";
+        toDoSearch.setAttribute('oninput', "searchTask()");
+        toDoSearch.placeholder = "Search For Task Here...";
+
+        // toDo Select dropdown
+        let toDoSelect = document.createElement('select');
+        toDoSelect.className = 'px-2 rounded-lg bg-white dark:bg-gray-300';
+        toDoSelect.id = 'js_toDoSelect';
+
+        let toDoSelectAll = document.createElement('option');
+        toDoSelectAll.textContent = 'All';
+        toDoSelectAll.value = 'all';
+
+        let toDoSelectComplete = document.createElement('option');
+        toDoSelectComplete.textContent = 'Complete';
+        toDoSelectComplete.value = 'complete';
+
+        let toDoSelectInProgress = document.createElement('option');
+        toDoSelectInProgress.textContent = 'In Progress';
+        toDoSelectInProgress.value = 'in-progress';
+
+        // Append search-task and filter dropdown to Form
+        toDoForm.appendChild(toDoSearchAndFilterDiv);
+        toDoSearchAndFilterDiv.appendChild(toDoSearch);
+        toDoSearchAndFilterDiv.appendChild(toDoSelect);
+        toDoSelect.appendChild(toDoSelectAll);
+        toDoSelect.appendChild(toDoSelectComplete);
+        toDoSelect.appendChild(toDoSelectInProgress);
 
         // toDo functionality
         let toDoInputGet = document.getElementById('js_toDoInput');
         let toDoAddBtn = document.getElementById('js_addBtnToDo');
+        let toDoArr = [];
 
+        window.addEventListener('load', function (e) {
+            e.preventDefault();
+            const getData = localStorage.getItem('data');
+            if (getData) {
+                toDoArr = JSON.parse(getData);
+                toDoArr.forEach((task) => {
+                    renderToDo(task)
+                })
+            }
+        })
+
+        //Add a new task on click on Add Button.
         toDoAddBtn.addEventListener('click', function (e) {
             e.preventDefault();
-            if (toDoInputGet.value === '') {
-                alert('Enter Your Task Name');
+
+            if (toDoInput.value.trim() === '') {
+                alert('Please Enter TaskName');
                 return;
             }
 
-            // todo Table-Row
+            // Create a to-do object
+            let toDoObj = {}
+            toDoObj.dateId = Date.now();
+            toDoObj.taskName = toDoInputGet.value.trim();
+            toDoObj.complete = false;
+
+            // Push new task to array         
+            toDoArr.push(toDoObj);
+            saveData();
+            renderToDo(toDoObj);
+
+            toDoInputGet.value = '';
+        });
+
+        let currentFilter = "all";
+
+        // Search and Filter Tasks
+        function searchAndFilterTasks() {
+            const searchedInput = document.getElementById('js_toDoSearchTask').value.toLowerCase().trim();
+            toDoTableTbody.innerHTML = '';
+
+            const filteredTasks = toDoArr.filter(task => {
+                const matchesSearch = task.taskName.toLowerCase().includes(searchedInput);
+
+                if (currentFilter === "all") {
+                    return matchesSearch;
+                } else if (currentFilter === "complete" && task.complete) {
+                    return matchesSearch;
+                } else if (currentFilter === "in-progress" && !task.complete) {
+                    return matchesSearch;
+                }
+            });
+
+            // if (filteredTasks.length === 0) {
+            //     alert('No match found.');
+            //     return;
+            // }
+            filteredTasks.forEach(task => {
+                renderToDo(task);
+            });
+
+        }
+
+        // Search Task Name
+        function searchTask() {
+            searchAndFilterTasks();
+        }
+
+        // Filter tasks based on the selected option
+        document.querySelector('#js_toDoSelect').addEventListener('change', function (e) {
+            e.preventDefault();
+            currentFilter = this.value;
+            searchAndFilterTasks();
+        });
+
+        searchAndFilterTasks();
+
+        function renderToDo(taskObj) {
+
             let toDoTableRow = document.createElement('tr');
-            toDoTableRow.setAttribute('class','flex justify-between p-2.5  hover:bg-[#f2f5fa] dark:bg-gray-300 dark:hover:bg-slate-200');
+            toDoTableRow.id = 'js_toDoTableRow';
+            toDoTableRow.className = 'flex justify-between p-2.5  hover:bg-[#f2f5fa] dark:bg-gray-300 dark:hover:bg-slate-200';
 
             // todo Table-data
             let toDoTableData = document.createElement('td');
-            toDoTableData.setAttribute('class','flex justify-between w-full')
+            toDoTableData.className = 'flex justify-between w-full';
             let toDoTableDataSpan = document.createElement('span');
-            toDoTableDataSpan.textContent = toDoInputGet.value;
-            toDoTableDataSpan.setAttribute('class','w-72 truncate');
+            toDoTableDataSpan.textContent = taskObj.taskName;
+            toDoTableDataSpan.className = 'w-64 truncate';
+            toDoTableDataSpan.id = 'js_taskName';
 
             //toDo buttons div
             let toDoBtnDiv = document.createElement('div');
@@ -267,48 +353,55 @@
             // todo Table-data complete button
             let toDoCompleteBtn = document.createElement('button');
             toDoCompleteBtn.textContent = 'Complete';
-            let toDoCompleteBtnAttributes = {
-                type: 'button',
-                value: 'complete/incomplete',
-                class: 'border border-gray-500 px-3 py-0.5 rounded-lg !mr-3 bg-gray-500 text-white dark:bg-gray-800',
-                id: 'js_completeBtn'
-            }
-            for (let key in toDoCompleteBtnAttributes) {
-                toDoCompleteBtn.setAttribute(key, toDoCompleteBtnAttributes[key]);
-            }
+            toDoCompleteBtn.type = 'button';
+            toDoCompleteBtn.value = 'complete/incomplete';
+            toDoCompleteBtn.className = 'border border-gray-500 px-3 py-0.5 rounded-lg !mr-3 bg-gray-500 text-white ';
+            toDoCompleteBtn.id = 'js_completeBtn';
+            taskObj.complete ? toDoCompleteBtn.classList.add('bg-green-700') : toDoCompleteBtn.classList.add('bg-gray-500');
 
             // todo Table-data delete button
             let toDoDeleteBtn = document.createElement('button');
             toDoDeleteBtn.textContent = 'Delete';
-            let toDoDeleteBtnAttributes = {
-                type: 'button',
-                value: 'delete',
-                class: 'border border-gray-500 px-3 py-0.5 rounded-lg !mr-3 bg-red-500 text-white',
-                id: 'js_deleteBtn'
-            }
-            for (let key in toDoDeleteBtnAttributes) {
-                toDoDeleteBtn.setAttribute(key, toDoDeleteBtnAttributes[key]);
-            }
+            toDoDeleteBtn.type = 'button';
+            toDoDeleteBtn.value = 'delete';
+            toDoDeleteBtn.className = 'border border-gray-500 px-3 py-0.5 rounded-lg !mr-3 bg-red-500 text-white';
+            toDoDeleteBtn.id = 'js_deleteBtn';
+            toDoDeleteBtn.setAttribute('data-key', taskObj.dateId);
 
-            // Line-through on TaskName on click Complete button and Remove Line-through on click on Incomplete
-            toDoCompleteBtn.addEventListener('click', function () {
-                if (toDoCompleteBtn.matches('#js_completeBtn')) {
-                    toDoTableDataSpan.setAttribute('class','line-through w-72 truncate');
-                    toDoCompleteBtn.textContent = 'Incomplete';
-                    toDoCompleteBtn.setAttribute('id', 'js_incompleteBtn');
-                } else if (toDoCompleteBtn.matches('#js_incompleteBtn')) {
-                    toDoTableDataSpan.setAttribute('class','no-underline w-72 truncate');
-                    toDoCompleteBtn.textContent = 'Complete';
-                    toDoCompleteBtn.setAttribute('id', 'js_completeBtn');
+            //Removing task from ToDo list
+            toDoDeleteBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                const index = toDoArr.findIndex((task) => task.dateId === taskObj.dateId)
+                if (index != -1) {
+                    toDoArr.splice(index, 1)
+                    toDoTableRow.remove()
+                    saveData();
                 }
             })
 
-            // Remove Table Row on Click on Delete Button
-            toDoDeleteBtn.addEventListener('click', function () {
-                toDoTableRow.remove();
+            // setting complete button text
+            toDoCompleteBtn.textContent = taskObj.complete ? 'Completed' : 'Incomplete';
+
+            if (taskObj.complete) {
+                toDoTableDataSpan.classList.add('line-through');
+            } else {
+                toDoTableDataSpan.classList.remove('line-through');
+            }
+
+            //Marking the task as Complete/Incomplete 
+            toDoCompleteBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                taskObj.complete = !taskObj.complete;
+                saveData();
+
+                // Update the button text
+                toDoCompleteBtn.textContent = taskObj.complete ? 'Completed' : 'Incomplete';
+                taskObj.complete ? toDoCompleteBtn.classList.add('bg-green-700') : toDoCompleteBtn.classList.add('bg-gray-500');
+
+                toDoTableDataSpan.classList.toggle('line-through');
             })
 
-            //toDo AppendChild
+            // Append table-row table-body
             toDoTableTbody.appendChild(toDoTableRow);
             toDoTableRow.appendChild(toDoTableData);
             toDoTableRow.appendChild(toDoTableData);
@@ -316,9 +409,11 @@
             toDoTableData.appendChild(toDoBtnDiv);
             toDoBtnDiv.appendChild(toDoCompleteBtn);
             toDoBtnDiv.appendChild(toDoDeleteBtn);
+        }
 
-            toDoInputGet.value = '';
-        });
+        function saveData() {
+            localStorage.setItem('data', JSON.stringify(toDoArr));
+        }
 
     </script>
 
