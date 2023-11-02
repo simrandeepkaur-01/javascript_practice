@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Flipkart, header, Search Products, to-do list,add tasks">
+    <meta name="description"
+        content="Explore the Flipkart header with a Search Product feature and a to-do list. Find and organize your tasks seamlessly.">
+    <title>To-do List</title>
+    <link rel="stylesheet" href="../../dist/output.css">
+</head>
+
+<body>
+    <script>
+        'use strict';
+
+        function createNewElement(element, id = null, className = null,) {
+            let elem = document.createElement(element);
+            elem.id = id;
+            elem.className = className;
+            return elem;
+        }
+
+        let main = document.createElement('main');
+        document.body.appendChild(main);
+        document.body.className = 'bg-[#e9effa] dark:bg-gray-700';
+
+        let mainDiv = createNewElement('div', 'js_mainDiv', 'flex items-center justify-center w-8/12 mx-auto justify-between  pt-20',);
+
+        let form = document.createElement('form');
+        form.action = '#';
+        mainDiv.appendChild(form);
+
+        function createInput(element, type, id = null, className = null, placeholder = null, autocomplete = 'off') {
+            let elem = document.createElement(element);
+            elem.type = type;
+            elem.id = id;
+            elem.className = className;
+            elem.placeholder = placeholder;
+            elem.autocomplete = autocomplete;
+            return elem;
+        }
+        let toDoInput = createInput('input', 'text', 'js_toDoInput', 'w-[400px] rounded-l-full px-3 p-2 ring-1 ring-gray-400 dark:bg-gray-300 dark:placeholder:text-gray-700', 'Enter your task Name');
+
+        function createButton(element, id = null, className = null, textContent, type, value = null) {
+            let elem = document.createElement(element);
+            elem.id = id;
+            elem.className = className;
+            elem.textContent = textContent;
+            elem.type = type;
+            elem.value = value;
+            return elem;
+        }
+        let toDoInputSubmit = createButton('button', 'js_addBtnToDo', 'text-white px-6 p-[9px] rounded-r-full bg-gray-500 dark:bg-gray-900', 'Add', 'submit', 'Add your Task Name');
+        form.append(toDoInput, toDoInputSubmit);
+
+        // table
+        let toDoTable = createNewElement('table', 'js_table', 'flex justify-between mx-auto w-[520px] max-h-96 bg-white dark:bg-gray-200 overflow-y-auto rounded-lg mt-14');
+        toDoTable.style = 'box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)';
+        main.append(mainDiv, toDoTable);
+
+        let toDoTableTbody = document.createElement('tbody');
+        toDoTableTbody.className = 'w-full divide-y divide-gray-200';
+        toDoTable.appendChild(toDoTableTbody);
+
+        // search task and filter container
+        let searchAndFilterContainer = createNewElement('div', 'js_search-filterDiv', 'flex justify-between w-[45%]');
+        mainDiv.appendChild(searchAndFilterContainer);
+
+        let toDoSearch = createInput('input', 'search', 'js_toDoSearchTask', 'rounded-lg p-1.5 px-3 w-80 dark:bg-gray-300 bg-white dark:placeholder:text-gray-700', 'Search For Task Here...');
+        toDoSearch.setAttribute('oninput', "searchTask()");
+
+        let toDoSelect = createNewElement('select', 'js_toDoSelect', 'px-2 rounded-lg bg-white dark:bg-gray-300');
+        searchAndFilterContainer.append(toDoSearch, toDoSelect);
+
+        // create select Option
+        function createOption(element, value, textContent) {
+            let elem = document.createElement(element);
+            elem.element = element;
+            elem.value = value;
+            elem.textContent = textContent;
+            return elem;
+        }
+        let toDoSelectAll = createOption('option', 'all', 'All');
+        let toDoSelectComplete = createOption('option', 'complete', 'Complete');
+        let toDoSelectInProgress = createOption('option', 'in-progress', 'In Progress');
+
+        toDoSelect.append(toDoSelectAll, toDoSelectComplete, toDoSelectInProgress);
+
+
+        // toDo functionality
+        let toDoInputGet = document.getElementById('js_toDoInput');
+        let toDoAddBtn = document.getElementById('js_addBtnToDo');
+        let toDoArr = [];
+
+        window.addEventListener('load', function (e) {
+            e.preventDefault();
+            const getData = localStorage.getItem('data');
+            if (getData) {
+                toDoArr = JSON.parse(getData);
+                toDoArr.forEach((task) => {
+                    renderToDo(task)
+                })
+            }
+        })
+
+        //Add a new task on click on Add Button.
+        toDoAddBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            if (toDoInput.value.trim() === '') {
+                alert('Please Enter Your TaskName');
+                return;
+            }
+
+            // Create a to-do object
+            let toDoObj = {}
+            toDoObj.dateId = Date.now();
+            toDoObj.taskName = toDoInputGet.value.trim();
+            toDoObj.complete = false;
+
+            // Push new task to array
+            toDoArr.push(toDoObj);
+            saveData();
+            renderToDo(toDoObj);
+
+            toDoInputGet.value = '';
+        });
+
+        let currentFilter = "all";
+
+        // Search and Filter Tasks
+        function searchAndFilterTasks() {
+            const searchedInput = document.getElementById('js_toDoSearchTask').value.toLowerCase().trim();
+            toDoTableTbody.innerHTML = '';
+
+            const filteredTasks = toDoArr.filter(task => {
+                const matchesSearch = task.taskName.toLowerCase().startsWith(searchedInput);
+
+                if (currentFilter === "all" || (currentFilter === "complete" && task.complete) || (currentFilter === "in-progress" && !task.complete)) {
+                    return matchesSearch;
+                }
+            });
+
+            filteredTasks.forEach(task => {
+                renderToDo(task);
+            });
+        }
+
+        // Search Task Name
+        function searchTask() {
+            searchAndFilterTasks();
+        }
+
+        // Filter tasks based on the selected option
+        document.querySelector('#js_toDoSelect').addEventListener('change', function (e) {
+            e.preventDefault();
+            currentFilter = this.value;
+            searchAndFilterTasks();
+        });
+
+        searchAndFilterTasks();
+
+        function renderToDo(taskObj) {
+            let toDoTableRow = createNewElement('tr', 'js_toDoTableRow', 'flex justify-between p-2.5  hover:bg-[#f2f5fa] dark:bg-gray-300 dark:hover:bg-slate-200')
+            // toDoTableTbody.appendChild(toDoTableRow);
+
+            let toDoTableData = createNewElement('td', null, 'flex justify-between w-full');
+            // toDoTableRow.appendChild(toDoTableData);
+
+            let toDoTableDataSpan = createNewElement('span', 'js_taskName', 'w-64 truncate');
+            toDoTableDataSpan.textContent = taskObj.taskName;
+
+            let toDoBtnDiv = document.createElement('div');
+
+            // todo Table-data complete button
+            let toDoCompleteBtn = createButton('button', 'js_completeBtn', 'px-3 py-0.5 rounded-lg !mr-3 bg-gray-500 text-white', 'Complete', 'button', 'complete/incomplete');
+            taskObj.complete ? toDoCompleteBtn.className = 'px-3 py-0.5 rounded-lg !mr-3 bg-green-700 text-white' : toDoCompleteBtn.className = 'px-3 py-0.5 rounded-lg !mr-3 bg-gray-500 text-white';
+
+            // todo Table-data delete button
+            let toDoDeleteBtn = createButton('button', 'js_deleteBtn', 'px-3 py-0.5 rounded-lg bg-red-500 text-white', 'Delete', 'button', 'delete');
+            toDoDeleteBtn.setAttribute('data-key', taskObj.dateId);
+
+            // toDoBtnDiv.append(toDoCompleteBtn, toDoDeleteBtn);
+            // toDoTableData.append(toDoTableDataSpan, toDoBtnDiv);
+
+            //Removing task from ToDo list
+            toDoDeleteBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                const index = toDoArr.findIndex((task) => task.dateId === taskObj.dateId)
+                if (index != -1) {
+                    toDoArr.splice(index, 1)
+                    toDoTableRow.remove()
+                    saveData();
+                }
+            })
+
+            // setting complete button text
+            toDoCompleteBtn.textContent = taskObj.complete ? 'Completed' : 'Incomplete';
+
+            if (taskObj.complete) {
+                toDoTableDataSpan.classList.add('line-through');
+            } else {
+                toDoTableDataSpan.classList.remove('line-through');
+            }
+
+            //Marking the task as Complete/Incomplete
+            toDoCompleteBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                taskObj.complete = !taskObj.complete;
+                saveData();
+
+                // Update the button text
+                toDoCompleteBtn.textContent = taskObj.complete ? 'Completed' : 'Incomplete';
+                taskObj.complete ? toDoCompleteBtn.className = 'px-3 py-0.5 rounded-lg !mr-3 bg-green-700 text-white' : toDoCompleteBtn.className = 'px-3 py-0.5 rounded-lg !mr-3 bg-gray-500 text-white';
+
+                toDoTableDataSpan.classList.toggle('line-through');
+            })
+            toDoTableTbody.appendChild(toDoTableRow);
+            toDoTableRow.appendChild(toDoTableData);
+            toDoBtnDiv.append(toDoCompleteBtn, toDoDeleteBtn);
+            toDoTableData.append(toDoTableDataSpan, toDoBtnDiv);
+        }
+
+        function saveData() {
+            localStorage.setItem('data', JSON.stringify(toDoArr));
+        }
+
+    </script>
+
+</body>
+
+</html>
