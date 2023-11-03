@@ -899,6 +899,10 @@ input[type="search"]::-webkit-search-decoration,
   margin-right: 1rem;
 }
 
+.mt-0 {
+  margin-top: 0px;
+}
+
 .mt-10 {
   margin-top: 2.5rem;
 }
@@ -949,18 +953,6 @@ input[type="search"]::-webkit-search-decoration,
 
 .mt-auto {
   margin-top: auto;
-}
-
-.ml-\[\] {
-  margin-left: ;
-}
-
-.ml-\[50px\] {
-  margin-left: 50px;
-}
-
-.mt-0 {
-  margin-top: 0px;
 }
 
 .box-border {
@@ -1114,6 +1106,14 @@ input[type="search"]::-webkit-search-decoration,
   max-height: 24rem;
 }
 
+.w-1 {
+  width: 0.25rem;
+}
+
+.w-1\/2 {
+  width: 50%;
+}
+
 .w-10 {
   width: 2.5rem;
 }
@@ -1166,10 +1166,6 @@ input[type="search"]::-webkit-search-decoration,
   width: 2rem;
 }
 
-.w-8\/12 {
-  width: 66.666667%;
-}
-
 .w-80 {
   width: 20rem;
 }
@@ -1186,10 +1182,6 @@ input[type="search"]::-webkit-search-decoration,
   width: 400px;
 }
 
-.w-\[45\%\] {
-  width: 45%;
-}
-
 .w-\[500px\] {
   width: 500px;
 }
@@ -1204,26 +1196,6 @@ input[type="search"]::-webkit-search-decoration,
 
 .w-screen {
   width: 100vw;
-}
-
-.w-1\/2 {
-  width: 50%;
-}
-
-.w-1 {
-  width: 0.25rem;
-}
-
-.w-2\/5 {
-  width: 40%;
-}
-
-.w-3\/5 {
-  width: 60%;
-}
-
-.w-1\/5 {
-  width: 20%;
 }
 
 .max-w-3xl {
@@ -1864,34 +1836,16 @@ input[type="search"]::-webkit-search-decoration,
   margin-left: calc(0.25rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
+.space-x-12 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(3rem * var(--tw-space-x-reverse));
+  margin-left: calc(3rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
 .space-x-2 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(0.5rem * var(--tw-space-x-reverse));
   margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
-}
-
-.space-x-96 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(24rem * var(--tw-space-x-reverse));
-  margin-left: calc(24rem * calc(1 - var(--tw-space-x-reverse)));
-}
-
-.space-x-44 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(11rem * var(--tw-space-x-reverse));
-  margin-left: calc(11rem * calc(1 - var(--tw-space-x-reverse)));
-}
-
-.space-x-32 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(8rem * var(--tw-space-x-reverse));
-  margin-left: calc(8rem * calc(1 - var(--tw-space-x-reverse)));
-}
-
-.space-x-28 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(7rem * var(--tw-space-x-reverse));
-  margin-left: calc(7rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .space-x-20 > :not([hidden]) ~ :not([hidden]) {
@@ -1900,10 +1854,28 @@ input[type="search"]::-webkit-search-decoration,
   margin-left: calc(5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
-.space-x-12 > :not([hidden]) ~ :not([hidden]) {
+.space-x-28 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
-  margin-right: calc(3rem * var(--tw-space-x-reverse));
-  margin-left: calc(3rem * calc(1 - var(--tw-space-x-reverse)));
+  margin-right: calc(7rem * var(--tw-space-x-reverse));
+  margin-left: calc(7rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-x-32 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(8rem * var(--tw-space-x-reverse));
+  margin-left: calc(8rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-x-44 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(11rem * var(--tw-space-x-reverse));
+  margin-left: calc(11rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-x-96 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(24rem * var(--tw-space-x-reverse));
+  margin-left: calc(24rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .space-y-reverse > :not([hidden]) ~ :not([hidden]) {
@@ -2777,40 +2749,12 @@ input[type="search"]::-webkit-search-decoration,
   padding-bottom: 1rem;
 }
 
-.pt-20 {
-  padding-top: 5rem;
-}
-
-.pl-\[50px\] {
-  padding-left: 50px;
-}
-
-.pl-\[0px\] {
-  padding-left: 0px;
-}
-
-.pl-\[80px\] {
-  padding-left: 80px;
-}
-
-.pl-\[100px\] {
-  padding-left: 100px;
-}
-
-.pl-\[300px\] {
-  padding-left: 300px;
-}
-
-.pl-\[250px\] {
-  padding-left: 250px;
-}
-
-.pl-\[200px\] {
-  padding-left: 200px;
-}
-
 .pl-\[240px\] {
   padding-left: 240px;
+}
+
+.pt-20 {
+  padding-top: 5rem;
 }
 
 .text-left {
