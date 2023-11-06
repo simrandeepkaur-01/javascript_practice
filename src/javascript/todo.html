@@ -252,6 +252,7 @@
                 e.preventDefault();
                 const index = toDoArr.findIndex((task) => task.dateId === taskObj.dateId)
                 if (index != -1) {
+                    
                     toDoArr.splice(index, 1)
                     toDoTableRow.remove()
                     saveData();
@@ -278,7 +279,6 @@
 
                 toDoTableDataSpan.classList.toggle('line-through');
             })
-
         }
 
         function saveData() {

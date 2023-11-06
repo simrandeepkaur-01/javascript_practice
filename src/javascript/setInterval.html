@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="js_start" type="button">Start</button>
+    <button id="js_stop" type="button">Stop</button>
+
+    <script>
+        //  Q Write a function printNumbers(from, to) that outputs a number every second, starting from from and ending with to.
+
+        // Using setInterval.
+
+        // let from = 2;
+        // let to = 5;
+        // let number = from < to ? 1 : -1;
+
+        // let printNumbersUsingInterval = setInterval(function () {
+        //     console.log(from);
+        //     if (from === to) {
+        //         clearInterval(printNumbersUsingInterval);
+        //     }
+        //     from += number;
+        // }, 1000);
+
+
+        // Using nested setTimeout.
+
+        // function printNumbersUsingTimeout(from, to) {
+        //     console.log(from);
+
+        //     if (from === to) {
+        //         return;
+        //     }
+
+        //     let number = from + (from < to ? 1 : -1);
+
+        //     setTimeout(function () {
+        //         printNumbersUsingTimeout(number, to);
+        //     }, 1000);
+
+        // }
+        // printNumbersUsingTimeout(5, 2);
+
+
+        // Q Write a function to create two button start or stop.When we click start it will start printing hii until we click on stop.
+
+        let start = document.getElementById('js_start');
+        let stop = document.getElementById('js_stop');
+
+        let interval;
+        let printHii = 'Hii';
+
+        start.addEventListener('click', function () {
+            if (!interval) {
+                interval = setInterval(function () {
+                    console.log(printHii);
+                }, 1000);
+            }
+        }, 1000);
+
+        stop.addEventListener('click', function () {
+            if (interval) {
+                interval = clearTimeout(interval);
+                interval = null;
+            }
+        }, 1000);
+
+    </script>
+</body>
+
+</html>
