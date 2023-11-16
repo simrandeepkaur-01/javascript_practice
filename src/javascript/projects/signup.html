@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../../dist/output.css">
+</head>
+
+<body class="flex justify-center items-center h-screen">
+    <!-- signup FORM -->
+    <form action="#" method="post" id="js_signupForm" name="signupForm"
+        class=" flex items-center flex-col xl:w-1/4 px-5 py-6 rounded-xl"
+        style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)">
+
+        <h1 class="text-2xl mb-6 text-gray-600 font-semibold">Signup Form</h1>
+        <div class="h-16  w-full">
+            <input placeholder="Name"
+                class="border-2 border-gray-300  px-3 py-2 w-full rounded-lg placeholder:text-gray-500"
+                autocomplete="off" name="name">
+            <p id="js_name" class="js_error  -bottom-5 left-2 text-red-500 text-sm font-medium"></p>
+        </div>
+
+        <div class="h-16  w-full">
+            <input placeholder="Email"
+                class="border-2 border-gray-300  w-full px-3 py-2 rounded-lg placeholder:text-gray-500"
+                autocomplete="off" name="email">
+            <p id="js_email" class="js_error  -bottom-5 left-2 text-red-500 text-sm font-medium"></p>
+        </div>
+
+        <div class="h-16  w-full">
+            <input placeholder="Contact No."
+                class="border-2 border-gray-300 w-full px-3 py-2 rounded-lg placeholder:text-gray-500"
+                autocomplete="off" name="contactNo">
+            <p id="js_contactNo" class="js_error  -bottom-5 left-2 text-red-500 text-sm font-medium"></p>
+        </div>
+
+        <div class="h-16  w-full">
+            <select name="country" name="country"
+                class="border-2 border-gray-300 w-full px-3 py-2 rounded-lg placeholder:text-gray-500">
+                <option value="choose your country" class="text-gray-500" selected>Choose your Country</option>
+                <option value="india">India</option>
+                <option value="united_states">United States</option>
+                <option value="australia">Australia</option>
+                <option value="germany">Germany</option>
+            </select>
+            <p id="js_country" class="js_error  -bottom-5 left-2 text-red-500 text-sm font-medium"></p>
+        </div>
+
+        <div class="h-16  w-full">
+            <input type="password" placeholder="Password"
+                class="border-2 border-gray-300  w-full px-3 py-2 rounded-lg placeholder:text-gray-500"
+                autocomplete="off" name="password">
+            <p id="js_password" class="js_error  -bottom-5 left-2 text-red-500 text-sm font-medium"></p>
+        </div>
+
+        <div class="h-16 w-full">
+            <input type="password" placeholder="Confirm Password"
+                class="border-2 border-gray-300  w-full px-3 py-2 rounded-lg placeholder:text-gray-500"
+                autocomplete="off" name="confirmPassword">
+            <p id="js_confirmPassword" class="js_error  -bottom-5 left-2 text-red-500 text-sm font-medium"></p>
+        </div>
+
+        <input type="submit" name="signupBtn" id="js_signupBtn" value="Submit"
+            class="bg-blue-600 w-full text-white py-2 mt-2 rounded-lg font-medium text-lg">
+
+    </form>
+
+    <script>
+        let signupForm = document.querySelector('#js_signupForm');
+
+        function setError(id, error) {
+            let element = document.getElementById(id);
+            element.innerHTML = error;
+        }
+
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            validateForm();
+        });
+
+        function validateForm() {
+            let name = document.forms['signupForm']['name'];
+            let email = document.forms['signupForm']['email'];
+            let contactNo = document.forms['signupForm']['contactNo'];
+            let country = document.forms['signupForm']['country'];
+            let password = document.forms['signupForm']['password'];
+            let confirmPassword = document.forms['signupForm']['confirmPassword'];
+
+            let formData = {
+                name: name.value.trim(),
+                email: email.value.trim(),
+                contactNo: contactNo.value.trim(),
+                country: country.value.trim(),
+                password: password.value.trim(),
+                confirmPassword: confirmPassword.value.trim()
+            };
+
+            // Object to store field errors
+            let fieldErrors = {};
+
+            // validate Name
+            if (formData.name === '' || formData.name == null) {
+                fieldErrors.name = 'Name must not be empty';
+            } else if (!(formData.name.match(/^[A-Za-z]+$/))) {
+                fieldErrors.name = 'Name should only be an alphabet';
+            }
+
+            // email validation
+            if (formData.email === '') {
+                fieldErrors.email = 'Email should not be empty';
+            } else if (!formData.email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
+                fieldErrors.email = 'Invalid Email address';
+            }
+
+            // validate number
+            if (formData.contactNo === '') {
+                fieldErrors.contactNo = 'Please Enter your Contact Number.';
+            } else if (!formData.contactNo.match(/^[0-9]+$/)) {
+                fieldErrors.contactNo = 'only numbers are acceptable. please avoid alphabets';
+            } else if (formData.contactNo.length !== 10) {
+                fieldErrors.contactNo = 'Contact Number must contain 10 digits';
+            }
+
+            // validate select
+            if (formData.country === 'choose your country') {
+                fieldErrors.country = 'Please select your Country';
+            }
+
+            // validate password
+            if (formData.password === '') {
+                fieldErrors.password = 'Password must not be empty.';
+            } else if (formData.password.length < 8) {
+                fieldErrors.password = 'Password length must be at least 8 characters';
+            } else if (formData.password.length > 15) {
+                fieldErrors.password = 'Password length must not exceed 15 characters';
+            } else if (!formData.password.match(/[A-Za-z]/) || !formData.password.match(/[0-9]/)) {
+                fieldErrors.password = 'Password must contain both letters and numbers';
+            } else if (!formData.password.match(/[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/)) {
+                fieldErrors.password = 'Password must contain at least one special character';
+            }
+
+            // validate confirm password 
+            if (formData.confirmPassword === '') {
+                fieldErrors.confirmPassword = 'Confirm Password must not be empty';
+            } else if (formData.confirmPassword !== formData.password) {
+                fieldErrors.confirmPassword = 'Confirm Password must be the same as Password';
+            }
+
+            // Display errors in the respective <p> tags
+            setError('js_name', fieldErrors.name || '');
+            setError('js_email', fieldErrors.email || '');
+            setError('js_contactNo', fieldErrors.contactNo || '');
+            setError('js_country', fieldErrors.country || '');
+            setError('js_password', fieldErrors.password || '');
+            setError('js_confirmPassword', fieldErrors.confirmPassword || '');
+
+            if (Object.values(fieldErrors).some(error => error !== '')) {
+                return;
+            }
+
+            signupForm.reset();
+            alert('Form Submitted');
+        }
+    </script>
+
+</body>
+
+</html>

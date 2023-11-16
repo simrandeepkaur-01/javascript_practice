@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../../dist/output.css">
+</head>
+
+<body>
+    <button id="js_click" class="border text-white px-5 py-1.5 rounded-lg bg-black bg-opacity-80"
+        type="button">Click</button>
+
+    <script>
+        let button = document.getElementById('js_click');
+        document.body.className = 'bg-gray-200';
+
+        button.addEventListener('click', function () {
+            let alert = document.createElement('div');
+            alert.textContent = 'This is an alert message.';
+            alert.className = 'w-96 h-36 border border-gray-900 bg-white rounded-lg mt-2 flex items-center justify-center';
+
+            document.body.appendChild(alert);
+
+            setTimeout(function () {
+                alert.remove();
+            }, 3000);
+        })
+    </script>
+</body>
+
+</html>
