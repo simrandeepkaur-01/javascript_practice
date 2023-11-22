@@ -81,23 +81,23 @@
         });
 
         function validateForm() {
-            let name = document.forms['signupForm']['name'];
-            let email = document.forms['signupForm']['email'];
-            let contactNo = document.forms['signupForm']['contactNo'];
-            let country = document.forms['signupForm']['country'];
-            let password = document.forms['signupForm']['password'];
-            let confirmPassword = document.forms['signupForm']['confirmPassword'];
+            let form = document.forms['signupForm'];
+            let name = form['name'];
+            let email = form['email'];
+            let contactNo = form['contactNo'];
+            let country = form['country'];
+            let password = form['password'];
+            let confirmPassword = form['confirmPassword'];
 
             let formData = {
                 name: name.value.trim(),
-                email: email.value.trim(),
+                email: email.value.trim().toLowerCase(),
                 contactNo: contactNo.value.trim(),
                 country: country.value.trim(),
                 password: password.value.trim(),
                 confirmPassword: confirmPassword.value.trim()
             };
 
-            // Object to store field errors
             let fieldErrors = {};
 
             // validate Name
@@ -105,6 +105,8 @@
                 fieldErrors.name = 'Name must not be empty';
             } else if (!(formData.name.match(/^[A-Za-z]+$/))) {
                 fieldErrors.name = 'Name should only be an alphabet';
+            } else if (formData.name.length < 3) {
+                fieldErrors.name = 'Name should be atleast three character long';
             }
 
             // email validation
@@ -117,11 +119,9 @@
             // validate number
             if (formData.contactNo === '') {
                 fieldErrors.contactNo = 'Please Enter your Contact Number.';
-            } else if (!formData.contactNo.match(/^[0-9]+$/)) {
-                fieldErrors.contactNo = 'only numbers are acceptable. please avoid alphabets';
-            } else if (formData.contactNo.length !== 10) {
-                fieldErrors.contactNo = 'Contact Number must contain 10 digits';
-            }
+            } else if (!formData.contactNo.match(/^(0|91)?[6-9][0-9]{9}$/)) {
+                fieldErrors.contactNo = 'Invalid Mobile Number';
+            } 
 
             // validate select
             if (formData.country === 'choose your country') {
@@ -161,7 +161,7 @@
             }
 
             signupForm.reset();
-            alert('Form Submitted');
+            alert(JSON.stringify(formData));
         }
     </script>
 

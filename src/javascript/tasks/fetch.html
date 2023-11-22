@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../../dist/output.css">
+</head>
+
+<body class="flex justify-center items-center flex-col">
+    <input type="text" id="js_input" class="border-2 border-gray-700 rounded-full w-96 px-3 py-2 my-12"
+        placeholder="Search Your Name" oninput="data.searchUserName()" autocomplete="off">
+    <ul id="js_userList" class="w-96 px-4 py-3 divide-y "></ul>
+    <script>
+
+        let data = {
+            promise: fetch('https://jsonplaceholder.typicode.com/users'),
+
+            fetchData: function () {
+                return this.promise.then((response) => {
+                    return response.json();
+                }).then((response2) => {
+                    this.data = response2;
+
+                    this.searchUserName();
+                }).catch((error) => { console.log(error); })
+            },
+
+            searchUserName: function () {
+                let inputValue = document.getElementById("js_input").value.toLowerCase().trim();
+                console.log(this.data);
+
+                let resultsContainer = document.getElementById("js_userList");
+                resultsContainer.innerHTML = '';
+
+                if (inputValue === "") {
+                    return;
+                }
+
+                let matchingUsers = this.data.filter((user) =>
+                    user.username.toLowerCase().includes(inputValue)
+                );
+
+                matchingUsers.forEach((user) => {
+                    let listItem = document.createElement("li");
+                    listItem.textContent = user.username;
+                    listItem.className = 'py-2';
+                    resultsContainer.appendChild(listItem);
+                });
+            }
+        }
+        data.fetchData();
+
+    </script>
+</body>
+
+</html>

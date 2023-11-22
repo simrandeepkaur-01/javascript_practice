@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Form</title>
+    <link rel="stylesheet" href="../../../../dist/output.css">
+</head>
+
+<body class="flex justify-center items-center flex-col w-screen ">
+
+    <form action="#" method="post" id="js_form" name="form" class="w-1/2 shadow-md shadow-gray-400 rounded-lg p-4">
+        <div class="grid gap-x-5 mt-2 mb-2 md:grid-cols-2">
+            <div class=" h-24">
+                <label for="js_firstName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First
+                    name</label>
+                <input type="text" id="js_firstName" name="firstName"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="John" autocomplete="off">
+                <p id="js_errorFirstName" class="js_error  -bottom-5 left-2 text-red-500 text-sm font-medium"></p>
+            </div>
+
+            <div class=" h-24">
+                <label for="js_lastName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last
+                    name</label>
+                <input type="text" id="js_lastName" name="lastName"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Doe" autocomplete="off">
+                <p id="js_errorLastName" class="js_error  -bottom-5 left-2 text-red-500 text-sm font-medium"></p>
+
+            </div>
+
+            <div class=" h-24">
+                <label for="js_email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                <input type="email" id="js_email" name="email"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="admin@gmail.com" autocomplete="off">
+                <p id="js_errorEmail" class="js_error  -bottom-5 left-2 text-red-500 text-sm font-medium"></p>
+
+            </div>
+
+            <div class=" h-24">
+                <label for="js_phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone
+                    number</label>
+                <input type="tel" id="js_phone" name="number"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="123-45-678" autocomplete="off">
+                <p id="js_errornumber" class="js_error  -bottom-5 left-2 text-red-500 text-sm font-medium"></p>
+
+            </div>
+
+
+            <fieldset class="flex flex-col  h-24">
+                <legend class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gender</legend>
+
+                <div class="flex items-center h-full gap-8">
+                    <div class="flex items-center ">
+                        <input id="js_genderMale" type="radio" name="gender" value="male"
+                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="js_genderMale"
+                            class="block ms-2  text-sm font-medium text-gray-900 dark:text-gray-300">
+                            Male
+                        </label>
+                    </div>
+
+                    <div class="flex items-center ">
+                        <input id="js_genderFemale" type="radio" name="gender" value="male"
+                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="js_genderFemale"
+                            class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                            Female
+                        </label>
+                    </div>
+                </div>
+                <p id="js_errorGender" class="js_error  -bottom-5 left-2 text-red-500 text-sm font-medium"></p>
+
+            </fieldset>
+
+            <div class=" h-24">
+                <label for="js_dob" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date Of
+                    Birth</label>
+                <input type="date" id="js_dob" name="dob"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <p id="js_errorDob" class="js_error  -bottom-5 left-2 text-red-500 text-sm font-medium"></p>
+            </div>
+
+            <div class=" h-24">
+                <label for="js_age" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Age</label>
+                <input type="number" id="js_age" name="age"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="18" autocomplete="off">
+                <p id="js_errorAge" class="js_error  -bottom-5 left-2 text-red-500 text-sm font-medium"></p>
+            </div>
+
+
+            <div class=" h-24">
+                <label for="js_bloodGroup" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select
+                    your
+                    Blood Group</label>
+                <select id="js_bloodGroup" name="bloodGroup"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value="choose your blood group" class="text-gray-500" selected>Blood Group</option>
+                    <option>O positive</option>
+                    <option>O negative</option>
+                    <option>A positive</option>
+                    <option>A negative</option>
+                    <option>B positive</option>
+                    <option>B negative</option>
+                    <option>AB positive</option>
+                    <option>AB negative</option>
+                </select>
+                <p id="js_errorBloodGroup" class="js_error  -bottom-5 left-2 text-red-500 text-sm font-medium"></p>
+            </div>
+
+
+            <div class=" h-24 relative">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="js_file">Add
+                    Image</label>
+                <input name="file"
+                    class="bg-gray-50  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    id="js_file" type="file">
+                <p class="absolute bg-gray-50 bottom-8 px-1 w-[75%] py-0.5 right-0 hidden" id="js_imageName"></p>
+                <p id="js_errorImg" class="js_error  -bottom-5 left-2 text-red-500 text-sm font-medium"></p>
+
+            </div>
+
+            <!-- role -->
+            <div class=" h-24">
+                <label for="js_role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
+                <select id="js_role" name="role"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value="choose your role" class="text-gray-500" selected>Choose Your Role</option>
+                    <option>Admin</option>
+                    <option>Employee</option>
+                    <option>Manager</option>
+                </select>
+                <p id="js_errorRole" class="js_error  -bottom-5 left-2 text-red-500 text-sm font-medium"></p>
+
+            </div>
+        </div>
+
+        <!-- fieldset-2 -->
+        <div class="mb-6 gap-4">
+            <div class=" h-28">
+                <label for="js_permanentAddress"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Permanent
+                    Address</label>
+                <textarea id="js_permanentAddress" name="permanentAddress"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                <p id="js_errorPermanentAddress" class="js_error  -bottom-5 left-2 text-red-500 text-sm font-medium">
+                </p>
+            </div>
+
+            <div class=" h-28">
+                <label for="js_errorcurrentAddress"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Current
+                    address</label>
+                <textarea id="js_currentAddress" name="currentAddress"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                <p id="js_errorCurrentAddress" class="js_error  -bottom-5 left-2 text-red-500 text-sm font-medium"></p>
+            </div>
+        </div>
+
+        <button type="submit"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-16 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+    </form>
+
+    <script>
+        const data = {
+            form: document.querySelector('#js_form'),
+
+            onSubmit: function () {
+                this.form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.getFormData();
+                })
+
+            },
+
+            getFormData: function () {
+                let formData = new FormData(this.form);
+
+                if (!this.validateForm(formData)) {
+                    return;
+                }
+
+                let newData = Object.fromEntries(formData);
+
+                this.storeImageData(formData, newData);
+                window.location.href = 'result.html'; 
+            },
+
+
+
+            storeImageData: function (formData, newData) {
+                let image = formData.get('file');
+
+                if (image.size > 0) {
+                    let reader = new FileReader();
+
+                    reader.addEventListener('load', () => {
+                        newData.file = reader.result;
+                        this.saveData(newData);
+
+                    });
+                    reader.readAsDataURL(image);
+
+                }
+
+            },
+
+            showFileNameOnEdit: function () {
+                document.getElementById('js_file').addEventListener('change', () => {
+                    document.getElementById('js_imageName').innerHTML = document.getElementById('js_file').files[0].name;
+                })
+            },
+
+
+            saveData: function (newData) {
+                let data = localStorage.getItem('formData');
+                let arrOfObj = JSON.parse(data) || [];
+
+                newData.id = Date.now();
+
+                newData.imageName = document.getElementById('js_file').files[0].name;
+
+                arrOfObj.push(newData)
+
+                localStorage.setItem('formData', JSON.stringify(arrOfObj));
+            },
+
+            editData: function () {
+                let searchParams = new URLSearchParams(window.location.search);
+                let userId = parseInt(searchParams.get('id'));
+
+                let data = localStorage.getItem('formData');
+                let arrOfObj = JSON.parse(data) || [];
+
+                let userObjIndex = arrOfObj.findIndex((obj) => obj.id === userId);
+
+                if (userObjIndex !== -1) {
+                    let userObj = arrOfObj[userObjIndex];
+
+                    this.setFormFieldValue('js_firstName', userObj.firstName);
+                    this.setFormFieldValue('js_lastName', userObj.lastName);
+                    this.setFormFieldValue('js_email', userObj.email);
+                    this.setFormFieldValue('js_phone', userObj.number);
+                    this.setFormFieldValue('js_dob', userObj.dob);
+                    this.setFormFieldValue('js_bloodGroup', userObj.bloodGroup);
+                    this.setFormFieldValue('js_role', userObj.role);
+                    this.setFormFieldValue('js_age', userObj.age);
+                    this.setFormFieldValue('js_permanentAddress', userObj.permanentAddress);
+                    this.setFormFieldValue('js_currentAddress', userObj.currentAddress);
+
+                    let genderRadio = document.querySelector(`input[name='gender'][value='${userObj.gender}']`);
+                    if (genderRadio) {
+                        genderRadio.checked = true;
+                    }
+
+                    let bloodGroupSelect = document.getElementById('js_bloodGroup');
+                    if (bloodGroupSelect) {
+                        bloodGroupSelect.value = userObj.bloodGroup;
+                    }
+
+                    let roleSelect = document.getElementById('js_role');
+                    if (roleSelect) {
+                        roleSelect.value = userObj.role;
+                    }
+
+                    this.form.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        this.updateFormData(arrOfObj, userObjIndex);
+                    });
+
+                    let imageName = document.getElementById('js_imageName');
+                    imageName.classList.remove('hidden');
+                    imageName.innerHTML = userObj.imageName;
+                }
+            },
+
+            updateFormData: function (arrOfObj, userObjIndex) {
+                let formData = new FormData(this.form);
+
+                if (!this.validateForm(formData)) {
+                    return;
+                }
+
+                let updatedData = Object.fromEntries(formData);
+
+                updatedData.id = arrOfObj[userObjIndex].id;
+
+                arrOfObj[userObjIndex] = updatedData;
+
+                localStorage.setItem('formData', JSON.stringify(arrOfObj));
+
+                window.location.href = 'result.html';
+            },
+
+
+            setFormFieldValue: function (fieldId, value) {
+                let field = document.getElementById(fieldId);
+                if (field) {
+                    field.value = value;
+                }
+            },
+
+            fieldErrors: {},
+
+            validateForm: function (formData) {
+
+                //validate firstname
+                let firstName = formData.get('firstName').trim();
+
+                if (firstName === '' || firstName == null) {
+                    this.fieldErrors.firstName = 'Name must not be empty';
+                } else if (!(firstName.match(/^[A-Za-z]+$/))) {
+                    this.fieldErrors.firstName = 'Name should only be an alphabet';
+                } else if (firstName.length < 3) {
+                    this.fieldErrors.firstName = 'Name should be atleast three character long';
+                }
+                else {
+                    this.fieldErrors.firstName = '';
+                }
+                this.setError('js_errorFirstName', this.fieldErrors.firstName);
+
+
+                //validate lastName
+                let lastName = formData.get('lastName').trim();
+
+                if (lastName === '' || lastName == null) {
+                    this.fieldErrors.lastName = 'Name must not be empty';
+                } else if (!(lastName.match(/^[A-Za-z]+$/))) {
+                    this.fieldErrors.lastName = 'Name should only be an alphabet';
+                } else if (lastName.length < 3) {
+                    this.fieldErrors.lastName = 'Name should be atleast three character long';
+                }
+                else {
+                    this.fieldErrors.lastName = '';
+                }
+                this.setError('js_errorLastName', this.fieldErrors.lastName);
+
+                // validate email
+                let email = formData.get('email').trim();
+
+                if (email === '') {
+                    this.fieldErrors.email = 'Email should not be empty';
+                } else if (!email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
+                    this.fieldErrors.email = 'Invalid Email address';
+                } else {
+                    this.fieldErrors.email = '';
+                }
+                this.setError('js_errorEmail', this.fieldErrors.email);
+
+
+                // validate number
+                let number = formData.get('number').trim();
+                if (number === '') {
+                    this.fieldErrors.number = 'Please Enter your Contact Number.';
+                } else if (!number.match(/^(0|91)?[6-9][0-9]{9}$/)) {
+                    this.fieldErrors.number = 'Invalid Mobile Number';
+                } else {
+                    this.fieldErrors.number = '';
+                }
+                this.setError('js_errornumber', this.fieldErrors.number);
+
+                // validate DOB
+                let dob = formData.get('dob').trim();
+                const dobDate = new Date(dob);
+                const today = new Date();
+                const calculatedAge = today.getFullYear() - dobDate.getFullYear();
+
+                if (dob === '') {
+                    this.fieldErrors.dob = 'Please Select Your Date Of Birth';
+                } else if (isNaN(dobDate)) {
+                    this.fieldErrors.dob = "Invalid date of birth";
+                } else if (dobDate > today) {
+                    this.fieldErrors.dob = "DOB cannot be in the future";
+                } else {
+                    this.fieldErrors.dob = '';
+                }
+                this.setError('js_errorDob', this.fieldErrors.dob);
+
+                // validate Age
+                let age = formData.get('age').trim();
+                if (age === '') {
+                    this.fieldErrors.age = "Please Enter Your Age";
+                } else if (!age.match(/^[1-9]\d*$/)) {
+                    this.fieldErrors.age = "Age is not valid";
+                } else if (parseInt(age) !== calculatedAge) {
+                    this.fieldErrors.age = "Age does not match the date of birth.";
+                } else {
+                    this.fieldErrors.age = '';
+                }
+                this.setError('js_errorAge', this.fieldErrors.age);
+
+                // validate gender
+                let gender = formData.get('gender');
+                if (gender === '' || gender === null) {
+                    this.fieldErrors.gender = 'Please Select Your Gender.';
+                } else {
+                    this.fieldErrors.gender = '';
+                }
+                this.setError('js_errorGender', this.fieldErrors.gender);
+
+                // validate blood group
+                let bloodGroup = formData.get('bloodGroup');
+                if (bloodGroup === 'choose your blood group') {
+                    this.fieldErrors.bloodGroup = 'Please select your Blood Group';
+                } else {
+                    this.fieldErrors.bloodGroup = '';
+                }
+                this.setError('js_errorBloodGroup', this.fieldErrors.bloodGroup);
+
+                // validate role
+                let role = formData.get('role');
+                if (role === 'choose your role') {
+                    this.fieldErrors.role = 'Please select your Role';
+                } else {
+                    this.fieldErrors.role = '';
+                }
+                this.setError('js_errorRole', this.fieldErrors.role);
+
+                // validate address
+                let currentAddress = formData.get('currentAddress').trim();
+                if (currentAddress === '') {
+                    this.fieldErrors.currentAddress = 'Please Enter Your Address';
+                } else {
+                    this.fieldErrors.currentAddress = '';
+                }
+                this.setError('js_errorCurrentAddress', this.fieldErrors.currentAddress);
+
+                let permanentAddress = formData.get('permanentAddress').trim();
+                if (permanentAddress === '') {
+                    this.fieldErrors.permanentAddress = 'Please Enter Your Address';
+                } else {
+                    this.fieldErrors.permanentAddress = '';
+                }
+                this.setError('js_errorPermanentAddress', this.fieldErrors.permanentAddress);
+
+                let file = formData.get('file');
+                if (file.size === 0) {
+                    this.fieldErrors.file = 'Please Select Your Image';
+                } else {
+                    this.fieldErrors.file = '';
+                }
+                this.setError('js_errorImg', this.fieldErrors.file);
+
+                let hasErrors = Object.values(this.fieldErrors).some(error => error !== '');
+
+                return !hasErrors;
+            },
+
+            setError: function (id, error) {
+                let element = document.getElementById(id);
+                element.innerHTML = error;
+            }
+        }
+
+        data.onSubmit();
+        data.editData();
+        data.showFileNameOnEdit();
+    </script>
+</body>
+
+</html>

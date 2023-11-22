@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../../dist/output.css">
+</head>
+
+<body class="bg-[#e9effa]">
+    <form action="#" name="addTaskForm" class="flex items-center justify-center my-20">
+        <input type="text" id="js_newTaskInput" name="newTaskInput" placeholder="Enter Your Task" autocomplete="off"
+            class="w-[400px]  bg-white rounded-l-full px-3 p-2 ring-1 ring-gray-400 ">
+        <input type="submit" id="js_submit" class="text-white px-6 p-[9px] rounded-r-full bg-gray-500 dark:bg-gray-900">
+    </form>
+
+    <section class="flex justify-around">
+        <!-- Assigned Tasks -->
+        <div class="w-96 bg-white p-2 h-[480px] rounded-lg border-2 shadow-md shadow-gray-500 ">
+            <h2 class="pb-1 flex justify-center font-medium text-lg text-gray-800 border-b border-b-gray-700">Assigned
+                Tasks</h2>
+            <ul id="js_assignedTask" class="overflow-y-auto h-[430px] mt-1"></ul>
+        </div>
+
+        <!-- processing Tasks -->
+        <div class="w-96 bg-white p-2 h-[480px] rounded-lg border-2 shadow-md shadow-gray-500">
+            <h2 class="pb-1 flex justify-center font-medium text-lg text-gray-800 border-b border-b-gray-700">Processing
+                Tasks</h2>
+            <ul id="js_processingTask" class="overflow-y-auto h-[430px] mt-1"></ul>
+
+        </div>
+
+        <!-- Completed Tasks -->
+        <div class="w-96 bg-white p-2 h-[480px] rounded-lg border-2 shadow-md shadow-gray-500">
+            <h2 class="pb-1 flex justify-center font-medium text-lg text-gray-800 border-b border-b-gray-700">Completed
+                Tasks</h2>
+            <ul id="js_completedTask" class="overflow-y-auto h-[430px] mt-1"></ul>
+        </div>
+
+    </section>
+
+    <!-- <script>
+        let input = document.forms['addTaskForm']['newTaskInput'];
+        let form = document.forms['addTaskForm'];
+
+        let assignedTask = document.getElementById('js_assignedTask');
+        let processingTask = document.getElementById('js_processingTask');
+
+        window.addEventListener('load', () => getData());
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            storeData();
+            getData();
+        })
+
+
+        // ***********************************************storeData()************************************************
+        function storeData() {
+            if (input.value.trim() === '') {
+                alert('Please Enter Your Task');
+                return;
+            }
+
+            let data = localStorage.getItem('assigned');
+            let obj = JSON.parse(data) || [];
+
+            let newObj = {
+                id: Date.now(),
+                element: 'li',
+                className: 'bg-[#e9effa] mt-3 px-3 py-2 rounded-lg hover:cursor-grab',
+                textContent: input.value.trim(),
+                draggable: 'true'
+            }
+
+            obj.push(newObj);
+
+            localStorage.setItem('assigned', JSON.stringify(obj));
+
+            input.value = '';
+        }
+
+        function createElement(elem) {
+            element = document.createElement(elem.element);
+            element.id = elem.id;
+            element.className = elem.className;
+            element.textContent = elem.textContent;
+            element.draggable = elem.draggable;
+            return element;
+        }
+
+        // ***********************************************getData()************************************************
+        function getData() {
+            let data = localStorage.getItem('assigned');
+            let obj = JSON.parse(data);
+
+            if (obj.length > 0) {
+                assignedTask.innerHTML = '';
+
+                for (let i = 0; i < obj.length; i++) {
+                    let li = createElement(obj[i]);
+                    assignedTask.prepend(li);
+                }
+
+                assignedTask.addEventListener('dragstart', (e) => {
+                    let selected = e.target;
+
+                    processingTask.addEventListener('dragover', (e) => {
+                        e.preventDefault();
+                        console.log('dragover');
+                    })
+
+                    processingTask.addEventListener('drop', (e) => {
+
+                        if (selected.tagName === 'LI') {
+                            let selectedId = parseInt(selected.id);
+
+                            for (let i = 0; i < obj.length; i++) {
+                                if (obj[i].id === selectedId) {
+                                    obj.splice(i, 1);
+                                    localStorage.setItem('assigned', JSON.stringify(obj));
+                                    selected.remove();
+
+                                    function addProcessingTask(selected) {
+                                        // console.log(selected.id);
+
+                                        let data = localStorage.getItem('processing');
+                                        let obj2 = JSON.parse(data) || [];
+
+                                        let newObj = {
+                                            id: selected.id,
+                                            element: selected.tagName.toLowerCase(),
+                                            className: selected.className,
+                                            textContent: selected.textContent,
+                                            draggable: selected.draggable
+                                        }
+
+                                        obj2.push(newObj);
+
+                                        localStorage.setItem('processing', JSON.stringify(obj2));
+                                    }
+                                    addProcessingTask(selected);
+                                    return;
+                                }
+                            }
+
+                            // let selectedObj = {
+                            //     id: selected.id,
+                            //     element: selected.tagName.toLowerCase(),
+                            //     className: selected.className,
+                            //     textContent: selected.textContent,
+                            //     draggable: selected.draggable
+                            // }
+
+                            // let data2 = localStorage.getItem('processing');
+                            // let parse1 = JSON.parse(data2) || [];
+
+                            // console.log('data2 '+ data2);
+                            // console.log('parse1 '+ parse1);
+                            // parse1.push(selectedObj);
+
+                            // console.log(selectedObj);
+
+                            // localStorage.setItem('processing', JSON.stringify(parse1));
+
+                            // console.log(parse1);
+
+                            // for (let i = 0; i < parse1.length; i++) {
+                            //     processingTask.innerHTML = '';
+                            //     let li = createElement(parse1[i]);
+                            //     processingTask.prepend(li);
+                            // }
+
+
+                        }
+
+                    })
+                })
+            }
+        }
+
+    </script> -->
+</body>
+
+</html>

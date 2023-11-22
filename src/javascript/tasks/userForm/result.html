@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <link rel="stylesheet" href="../../../../dist/output.css">
+</head>
+
+<body class="flex justify-center items-center  flex-col space-y-10">
+    <input id="js_search" type="search" class="border border-gray-800 w-96 px-2 py-1 rounded-full"
+        placeholder="Search Your User Name...">
+    <table id="js_table" class="divide-y-2 divide-y-red-800 w-1/2">
+        <thead class="w-full">
+            <tr>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>View</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody id="js_tbody" class="w-full h-full">
+        </tbody>
+    </table>
+
+    <script>
+        const getData = {
+            arrOfObj: JSON.parse(localStorage.getItem('formData')) || [],
+
+            displayData: function () {
+                const tbody = document.getElementById('js_tbody');
+                tbody.innerHTML = '';
+
+                const searchTerm = document.getElementById('js_search').value.toLowerCase();
+
+                this.arrOfObj.forEach(element => {
+                    const userName = element.firstName.toLowerCase();
+                    if (userName.includes(searchTerm)) {
+                        let tr = document.createElement('tr');
+
+                        let tdImage = document.createElement('td');
+                        let imgElement = document.createElement('img');
+                        imgElement.src = element.file;
+                        imgElement.alt = 'User Image';
+                        imgElement.classList = 'w-28';
+                        tdImage.appendChild(imgElement);
+
+                        let tdName = document.createElement('td');
+                        tdName.textContent = `${element.firstName}`;
+
+                        let tdEmail = document.createElement('td');
+                        tdEmail.textContent = `${element.email}`;
+
+                        let tdRole = document.createElement('td');
+                        tdRole.textContent = `${element.role}`;
+
+                        let tdView = document.createElement('td');
+                        let viewBtn = document.createElement('button');
+                        viewBtn.textContent = 'View';
+                        tdView.appendChild(viewBtn);
+
+                        let tdEdit = document.createElement('td');
+                        let editBtn = document.createElement('button');
+                        editBtn.textContent = 'Edit';
+                        tdEdit.appendChild(editBtn)
+
+                        let tdDelete = document.createElement('td');
+                        let deleteBtn = document.createElement('button');
+                        deleteBtn.textContent = 'Delete';
+                        tdDelete.appendChild(deleteBtn);
+
+                        // delete data
+                        deleteBtn.addEventListener('click', (e) => {
+                            let confirmDelete = window.confirm('Do You Want to Delete Your Data?');
+
+                            if (confirmDelete) {
+                                let id = element.id;
+                                this.arrOfObj = this.arrOfObj.filter((element) => {
+                                    return element.id !== id;
+                                });
+                                localStorage.setItem('formData', JSON.stringify(this.arrOfObj));
+                                window.location.href = "./result.html";
+                            }
+                        })
+
+                        // view data
+                        editBtn.addEventListener('click', () => {
+                            let id = element.id;
+                            window.location.href = `./index.html?id=${id}`;
+                        });
+
+                        tbody.appendChild(tr);
+                        tr.append(tdImage, tdName, tdEmail, tdRole, tdView, tdEdit, tdDelete);
+                    }
+                });
+            },
+
+            debounce: function (func, delay) {
+                let timer;
+                return function () {
+                    const context = this;
+                    const args = arguments;
+                    clearTimeout(timer);
+                    timer = setTimeout(function () {
+                        func.apply(context, args);
+                    }, delay);
+                };
+            },
+
+            searchUser: function () {
+                const searchInput = document.getElementById('js_search');
+                searchInput.addEventListener('input', this.debounce(() => {
+                    this.displayData();
+                }, 500));
+            }
+        }
+
+        getData.displayData();
+        getData.searchUser();
+    </script>
+</body>
+
+</html>
