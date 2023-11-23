@@ -9,20 +9,20 @@
 </head>
 
 <body class="flex justify-center items-center  flex-col space-y-10">
-    <input id="js_search" type="search" class="border border-gray-800 w-96 px-2 py-1 rounded-full"
+    <input id="js_search" type="search" class="border-2 border-gray-400 w-96 px-2 py-1 rounded-full mt-16 mb-4"
         placeholder="Search Your User Name...">
-    <table id="js_table" class="divide-y-2 divide-y-red-800 w-1/2">
+    <table id="js_table" class="divide-y-2 divide-y-red-800 w-1/2 ">
         <thead class="w-full">
             <tr>
+                <th>Image</th>
                 <th>User Name</th>
                 <th>Email</th>
                 <th>Role</th>
-                <th>View</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
         </thead>
-        <tbody id="js_tbody" class="w-full h-full">
+        <tbody id="js_tbody" class="w-full">
         </tbody>
     </table>
 
@@ -33,6 +33,7 @@
             displayData: function () {
                 const tbody = document.getElementById('js_tbody');
                 tbody.innerHTML = '';
+                tbody.className = 'divide-y divide-y-gray-800 ';
 
                 const searchTerm = document.getElementById('js_search').value.toLowerCase();
 
@@ -45,7 +46,7 @@
                         let imgElement = document.createElement('img');
                         imgElement.src = element.file;
                         imgElement.alt = 'User Image';
-                        imgElement.classList = 'w-28';
+                        imgElement.classList = 'w-12 rounded-full';
                         tdImage.appendChild(imgElement);
 
                         let tdName = document.createElement('td');
@@ -57,10 +58,6 @@
                         let tdRole = document.createElement('td');
                         tdRole.textContent = `${element.role}`;
 
-                        let tdView = document.createElement('td');
-                        let viewBtn = document.createElement('button');
-                        viewBtn.textContent = 'View';
-                        tdView.appendChild(viewBtn);
 
                         let tdEdit = document.createElement('td');
                         let editBtn = document.createElement('button');
@@ -93,7 +90,7 @@
                         });
 
                         tbody.appendChild(tr);
-                        tr.append(tdImage, tdName, tdEmail, tdRole, tdView, tdEdit, tdDelete);
+                        tr.append(tdImage, tdName, tdEmail, tdRole, tdEdit, tdDelete);
                     }
                 });
             },

@@ -290,11 +290,31 @@
 
                 updatedData.id = arrOfObj[userObjIndex].id;
 
-                arrOfObj[userObjIndex] = updatedData;
 
-                localStorage.setItem('formData', JSON.stringify(arrOfObj));
+                let image = formData.get('file');
 
-                window.location.href = 'result.html';
+                if (image.size > 0) {
+                    let reader = new FileReader();
+
+                    reader.addEventListener('load', () => {
+                        updatedData.file = reader.result;
+                        updatedData.imageName = image.name;
+
+                        arrOfObj[userObjIndex] = updatedData;
+                        localStorage.setItem('formData', JSON.stringify(arrOfObj));
+                        window.location.href = 'result.html';
+                    });
+
+                    reader.readAsDataURL(image);
+                } else {
+                    updatedData.file = arrOfObj[userObjIndex].file;
+                    updatedData.imageName = arrOfObj[userObjIndex].imageName;
+
+                    arrOfObj[userObjIndex] = updatedData;
+                    localStorage.setItem('formData', JSON.stringify(arrOfObj));
+                    window.location.href = 'result.html';
+                }
+
             },
 
 
