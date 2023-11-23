@@ -8,21 +8,31 @@
     <link rel="stylesheet" href="../../../../dist/output.css">
 </head>
 
-<body class="flex justify-center items-center  flex-col space-y-10">
-    <input id="js_search" type="search" class="border-2 border-gray-400 w-96 px-2 py-1 rounded-full mt-16 mb-4"
-        placeholder="Search Your User Name...">
-    <table id="js_table" class="divide-y-2 divide-y-red-800 w-1/2 ">
-        <thead class="w-full">
+<body class="flex justify-center items-center  flex-col bg-gray-100">
+    <nav class="w-screen h-20 flex items-center justify-between bg-gray-800 px-24">
+        <input id="js_search" type="search" class=" w-[400px] px-3 py-1.5 rounded-full ml-28 placeholder:text-gray-800"
+            placeholder="Search Your User Name...">
+        <button type="button" id="js_addNewUser"
+            class="bg-white relative text-gray-800 px-16 py-1.5 rounded-lg mr-12 text-md font-medium">Add New
+            User
+            <svg class="w-6 h-6 absolute top-1/2 -translate-y-1/2 left-9 text-gray-800"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
+            </svg></button>
+    </nav>
+    <table id="js_table" class="text-center w-10/12 rounded-lg shadow-lg shadow-gray-400 mt-16">
+        <thead class="w-full h-16  bg-gray-800 rounded-full text-white">
             <tr>
-                <th>Image</th>
+                <th class="rounded-tl-lg">Image</th>
                 <th>User Name</th>
                 <th>Email</th>
                 <th>Role</th>
                 <th>Edit</th>
-                <th>Delete</th>
+                <th class="rounded-tr-lg">Delete</th>
             </tr>
         </thead>
-        <tbody id="js_tbody" class="w-full">
+        <tbody id="js_tbody" class="w-full ">
         </tbody>
     </table>
 
@@ -33,40 +43,37 @@
             displayData: function () {
                 const tbody = document.getElementById('js_tbody');
                 tbody.innerHTML = '';
-                tbody.className = 'divide-y divide-y-gray-800 ';
+                tbody.className = 'divide-y divide-y-red-800 ';
 
                 const searchTerm = document.getElementById('js_search').value.toLowerCase();
 
                 this.arrOfObj.forEach(element => {
                     const userName = element.firstName.toLowerCase();
                     if (userName.includes(searchTerm)) {
+
                         let tr = document.createElement('tr');
 
                         let tdImage = document.createElement('td');
+                        tdImage.className = 'flex justify-center p-1';
                         let imgElement = document.createElement('img');
                         imgElement.src = element.file;
                         imgElement.alt = 'User Image';
-                        imgElement.classList = 'w-12 rounded-full';
+                        imgElement.classList = 'w-16 rounded-full ';
                         tdImage.appendChild(imgElement);
 
-                        let tdName = document.createElement('td');
-                        tdName.textContent = `${element.firstName}`;
-
-                        let tdEmail = document.createElement('td');
-                        tdEmail.textContent = `${element.email}`;
-
-                        let tdRole = document.createElement('td');
-                        tdRole.textContent = `${element.role}`;
-
+                        let tdName = this.createTableCell('td', `${element.firstName}`);
+                        let tdEmail = this.createTableCell('td', `${element.email}`);
+                        let tdRole = this.createTableCell('td', `${element.role}`);
 
                         let tdEdit = document.createElement('td');
-                        let editBtn = document.createElement('button');
-                        editBtn.textContent = 'Edit';
-                        tdEdit.appendChild(editBtn)
+                        let editBtn = this.createTableCell('button', 'Edit');
+                        editBtn.className = 'rounded-lg px-7 py-1 bg-blue-600 text-white'
+                        tdEdit.appendChild(editBtn);
 
                         let tdDelete = document.createElement('td');
-                        let deleteBtn = document.createElement('button');
-                        deleteBtn.textContent = 'Delete';
+
+                        let deleteBtn = this.createTableCell('button', 'Delete');
+                        deleteBtn.className = 'rounded-lg px-4 py-1 bg-red-500 text-white';
                         tdDelete.appendChild(deleteBtn);
 
                         // delete data
@@ -91,8 +98,15 @@
 
                         tbody.appendChild(tr);
                         tr.append(tdImage, tdName, tdEmail, tdRole, tdEdit, tdDelete);
+                        tr.className = 'bg-white ';
                     }
                 });
+            },
+
+            createTableCell: function (elem, textContent) {
+                let element = document.createElement(elem);
+                element.textContent = textContent;
+                return element;
             },
 
             debounce: function (func, delay) {
@@ -112,11 +126,19 @@
                 searchInput.addEventListener('input', this.debounce(() => {
                     this.displayData();
                 }, 500));
+            },
+
+            AddUser: function () {
+                const addUserBtn = document.getElementById('js_addNewUser');
+                addUserBtn.addEventListener('click', () => {
+                    window.location.href = "./index.html";
+                })
             }
         }
 
         getData.displayData();
         getData.searchUser();
+        getData.AddUser();
     </script>
 </body>
 

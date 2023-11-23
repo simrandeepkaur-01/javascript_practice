@@ -114,13 +114,25 @@
             </div>
 
 
-            <div class=" h-24 relative">
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="js_file">Add
-                    Image</label>
-                <input name="file"
-                    class="bg-gray-50  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    id="js_file" type="file">
-                <p class="absolute bg-gray-50 bottom-8 px-1 w-[75%] py-0.5 right-0 hidden" id="js_imageName"></p>
+            <div class=" h-24 relative ">
+                <div class="flex justify-center items-center w-full">
+                    <div class="flex-1 items-center flex justify-center">
+                        <img class="w-14 h-14 rounded-full" id="js_avatar"
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaQBkObFHtWztejWTFJJFCl7C0WajxHPAlTg&usqp=CAU"
+                            alt="Avatar">
+                    </div>
+
+
+                    <div class=" w-9/12">
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="js_file">Add
+                            Image</label>
+                        <input name="file"
+                            class="bg-gray-50  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            id="js_file" type="file">
+                        <!-- <p class="absolute bg-gray-50 bottom-8 px-1 w-[75%] py-0.5 right-0 hidden" id="js_imageName"> -->
+                        </p>
+                    </div>
+                </div>
                 <p id="js_errorImg" class="js_error  -bottom-5 left-2 text-red-500 text-sm font-medium"></p>
 
             </div>
@@ -191,8 +203,6 @@
                 window.location.href = 'result.html';
             },
 
-
-
             storeImageData: function (formData, newData) {
                 let image = formData.get('file');
 
@@ -205,16 +215,16 @@
 
                     });
                     reader.readAsDataURL(image);
-
                 }
-
             },
 
-            showFileNameOnEdit: function () {
-                document.getElementById('js_file').addEventListener('change', () => {
-                    document.getElementById('js_imageName').innerHTML = document.getElementById('js_file').files[0].name;
-                })
-            },
+            // showFileNameOnEdit: function () {
+            //     document.getElementById('js_file').addEventListener('change', () => {
+            //         let img = document.getElementById('js_avatar');
+            //         alert(img);
+            //         console.log(document.getElementById('js_file').files[0].name); 
+            //     })
+            // },
 
 
             saveData: function (newData) {
@@ -239,6 +249,7 @@
 
                 let userObjIndex = arrOfObj.findIndex((obj) => obj.id === userId);
 
+
                 if (userObjIndex !== -1) {
                     let userObj = arrOfObj[userObjIndex];
 
@@ -252,6 +263,9 @@
                     this.setFormFieldValue('js_age', userObj.age);
                     this.setFormFieldValue('js_permanentAddress', userObj.permanentAddress);
                     this.setFormFieldValue('js_currentAddress', userObj.currentAddress);
+
+                    let UserAvatar = document.getElementById('js_avatar');
+                    UserAvatar.src = userObj.file;
 
                     let genderRadio = document.querySelector(`input[name='gender'][value='${userObj.gender}']`);
                     if (genderRadio) {
@@ -271,11 +285,12 @@
                     this.form.addEventListener('submit', (e) => {
                         e.preventDefault();
                         this.updateFormData(arrOfObj, userObjIndex);
+                        // let errorElement = document.getElementById('js_errorImg');
+                        // errorElement.innerHTML = '';
+                        // window.location.href = 'result.html';
+
                     });
 
-                    let imageName = document.getElementById('js_imageName');
-                    imageName.classList.remove('hidden');
-                    imageName.innerHTML = userObj.imageName;
                 }
             },
 
@@ -314,9 +329,7 @@
                     localStorage.setItem('formData', JSON.stringify(arrOfObj));
                     window.location.href = 'result.html';
                 }
-
             },
-
 
             setFormFieldValue: function (fieldId, value) {
                 let field = document.getElementById(fieldId);
@@ -458,8 +471,11 @@
                 }
                 this.setError('js_errorPermanentAddress', this.fieldErrors.permanentAddress);
 
+                // validate file
                 let file = formData.get('file');
-                if (file.size === 0) {
+                let searchParams = new URLSearchParams(window.location.search);
+                let userId = parseInt(searchParams.get('id'));
+                if (file.size === 0 && isNaN(userId)) {
                     this.fieldErrors.file = 'Please Select Your Image';
                 } else {
                     this.fieldErrors.file = '';
@@ -479,7 +495,8 @@
 
         data.onSubmit();
         data.editData();
-        data.showFileNameOnEdit();
+
+        // data.showFileNameOnEdit();
     </script>
 </body>
 
