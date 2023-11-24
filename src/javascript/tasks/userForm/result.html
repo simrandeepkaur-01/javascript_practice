@@ -56,8 +56,8 @@
     </table>
 
     <script>
-        const getData = {
-            arrOfObj: JSON.parse(localStorage.getItem('formData')) || [],
+        const user = {
+            getUserFromLocalStorage: JSON.parse(localStorage.getItem('formData')) || [],
 
             render: function () {
                 const tbody = document.getElementById('js_tbody');
@@ -66,7 +66,7 @@
 
                 const searchTerm = document.getElementById('js_search').value.toLowerCase();
 
-                this.arrOfObj.forEach(element => {
+                this.getUserFromLocalStorage.forEach(element => {
                     const userName = element.firstName.toLowerCase();
                     if (userName.includes(searchTerm)) {
 
@@ -101,10 +101,10 @@
 
                             if (confirmDelete) {
                                 let id = element.id;
-                                this.arrOfObj = this.arrOfObj.filter((element) => {
+                                this.getUserFromLocalStorage = this.getUserFromLocalStorage.filter((element) => {
                                     return element.id !== id;
                                 });
-                                localStorage.setItem('formData', JSON.stringify(this.arrOfObj));
+                                localStorage.setItem('formData', JSON.stringify(this.getUserFromLocalStorage));
                                 window.location.href = "./result.html";
                             }
                         })
@@ -140,14 +140,14 @@
                 };
             },
 
-            searchUser: function () {
+            search: function () {
                 const searchInput = document.getElementById('js_search');
                 searchInput.addEventListener('input', this.debounce(() => {
                     this.render();
                 }, 500));
             },
 
-            addUser: function () {
+            display: function () {
                 const addUserBtn = document.getElementById('js_addNewUser');
                 addUserBtn.addEventListener('click', () => {
                     window.location.href = "./index.html";
@@ -155,9 +155,9 @@
             }
         }
 
-        getData.render();
-        getData.searchUser();
-        getData.addUser();
+        user.render();
+        user.search();
+        user.display();
     </script>
 </body>
 
