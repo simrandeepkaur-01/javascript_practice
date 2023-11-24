@@ -49,16 +49,16 @@
                 <p id="js_errornumber" class="js_error  -bottom-5 left-2 text-red-500 text-sm font-medium"></p>
             </div>
 
-            <div class=" h-24">
+            <!-- <div class=" h-24">
                 <label for="js_phone"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                 <input type="password" name="password" id="js_password" placeholder="••••••••"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="123-45-678" autocomplete="off">
                 <p id="js_errornumber" class="js_error  -bottom-5 left-2 text-red-500 text-sm font-medium"></p>
-            </div>
+            </div> -->
 
-            <div class=" h-24">
+            <!-- <div class=" h-24">
                 <label for="js_phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm
                     Password
                 </label>
@@ -66,7 +66,7 @@
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="123-45-678" autocomplete="off">
                 <p id="js_errornumber" class="js_error  -bottom-5 left-2 text-red-500 text-sm font-medium"></p>
-            </div>
+            </div> -->
 
             <fieldset class="flex flex-col  h-24">
                 <legend class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gender</legend>
@@ -180,7 +180,7 @@
                 </p>
             </div>
 
-            <div class=" h-28">
+            <div class="mb-6 h-28">
                 <label for="js_errorcurrentAddress"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Current
                     address</label>
@@ -190,17 +190,16 @@
             </div>
         </div>
 
-        <div class="flex items-start mb-6">
+        <!-- <div class="flex items-start mb-6">
             <div class="flex items-center h-5">
-                <input id="terms" aria-describedby="terms" type="checkbox"
+                <input id="js_isPermanentAddressSame" type="checkbox"
                     class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800">
             </div>
             <div class="ml-3 text-sm">
                 <label for="terms" class="text-gray-800 dark:text-gray-300">Permanent Address is same as Current
                     Address</label>
             </div>
-        </div>
-
+        </div> -->
 
         <button type="submit"
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-16 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
@@ -213,12 +212,12 @@
             onFormSubmit: function () {
                 this.form.addEventListener('submit', (e) => {
                     e.preventDefault();
-                    this.getUserData();
+                    this.get();
                 })
 
             },
 
-            getUserData: function () {
+            get: function () {
                 let formData = new FormData(this.form);
 
                 if (!this.validateForm(formData)) {
@@ -227,11 +226,11 @@
 
                 let newData = Object.fromEntries(formData);
 
-                this.storeImageData(formData, newData);
+                this.storeBase64Image(formData, newData);
                 window.location.href = 'result.html';
             },
 
-            storeImageData: function (formData, newData) {
+            storeBase64Image: function (formData, newData) {
                 let image = formData.get('file');
 
                 if (image.size > 0) {
@@ -259,7 +258,7 @@
                 localStorage.setItem('formData', JSON.stringify(arrOfObj));
             },
 
-            editUserData: function () {
+            edit: function () {
                 let searchParams = new URLSearchParams(window.location.search);
                 let userId = parseInt(searchParams.get('id'));
 
@@ -303,14 +302,14 @@
 
                     this.form.addEventListener('submit', (e) => {
                         e.preventDefault();
-                        this.updateUserData(arrOfObj, userObjIndex);
+                        this.update(arrOfObj, userObjIndex);
                        
                     });
 
                 }
             },
 
-            updateUserData: function (arrOfObj, userObjIndex) {
+            update: function (arrOfObj, userObjIndex) {
                 let formData = new FormData(this.form);
 
                 if (!this.validateForm(formData)) {
@@ -354,7 +353,7 @@
                 }
             },
 
-            fieldErrors: {},
+            errors: {},
 
             validateForm: function (formData) {
 
@@ -362,56 +361,56 @@
                 let firstName = formData.get('firstName').trim();
 
                 if (firstName === '' || firstName == null) {
-                    this.fieldErrors.firstName = 'Name must not be empty';
+                    this.errors.firstName = 'Name must not be empty';
                 } else if (!(firstName.match(/^[A-Za-z]+$/))) {
-                    this.fieldErrors.firstName = 'Name should only be an alphabet';
+                    this.errors.firstName = 'Name should only be an alphabet';
                 } else if (firstName.length < 3) {
-                    this.fieldErrors.firstName = 'Name should be atleast three character long';
+                    this.errors.firstName = 'Name should be atleast three character long';
                 }
                 else {
-                    this.fieldErrors.firstName = '';
+                    this.errors.firstName = '';
                 }
-                this.setError('js_errorFirstName', this.fieldErrors.firstName);
+                this.setError('js_errorFirstName', this.errors.firstName);
 
 
                 //validate lastName
                 let lastName = formData.get('lastName').trim();
 
                 if (lastName === '' || lastName == null) {
-                    this.fieldErrors.lastName = 'Name must not be empty';
+                    this.errors.lastName = 'Name must not be empty';
                 } else if (!(lastName.match(/^[A-Za-z]+$/))) {
-                    this.fieldErrors.lastName = 'Name should only be an alphabet';
+                    this.errors.lastName = 'Name should only be an alphabet';
                 } else if (lastName.length < 3) {
-                    this.fieldErrors.lastName = 'Name should be atleast three character long';
+                    this.errors.lastName = 'Name should be atleast three character long';
                 }
                 else {
-                    this.fieldErrors.lastName = '';
+                    this.errors.lastName = '';
                 }
-                this.setError('js_errorLastName', this.fieldErrors.lastName);
+                this.setError('js_errorLastName', this.errors.lastName);
 
                 // validate email
                 let email = formData.get('email').trim();
 
                 if (email === '') {
-                    this.fieldErrors.email = 'Email should not be empty';
+                    this.errors.email = 'Email should not be empty';
                 } else if (!email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
-                    this.fieldErrors.email = 'Invalid Email address';
+                    this.errors.email = 'Invalid Email address';
                 } else {
-                    this.fieldErrors.email = '';
+                    this.errors.email = '';
                 }
-                this.setError('js_errorEmail', this.fieldErrors.email);
+                this.setError('js_errorEmail', this.errors.email);
 
 
                 // validate number
                 let number = formData.get('number').trim();
                 if (number === '') {
-                    this.fieldErrors.number = 'Please Enter your Contact Number.';
+                    this.errors.number = 'Please Enter your Contact Number.';
                 } else if (!number.match(/^(0|91)?[6-9][0-9]{9}$/)) {
-                    this.fieldErrors.number = 'Invalid Mobile Number';
+                    this.errors.number = 'Invalid Mobile Number';
                 } else {
-                    this.fieldErrors.number = '';
+                    this.errors.number = '';
                 }
-                this.setError('js_errornumber', this.fieldErrors.number);
+                this.setError('js_errornumber', this.errors.number);
 
                 // validate DOB
                 let dob = formData.get('dob').trim();
@@ -420,85 +419,85 @@
                 const calculatedAge = today.getFullYear() - dobDate.getFullYear();
 
                 if (dob === '') {
-                    this.fieldErrors.dob = 'Please Select Your Date Of Birth';
+                    this.errors.dob = 'Please Select Your Date Of Birth';
                 } else if (isNaN(dobDate)) {
-                    this.fieldErrors.dob = "Invalid date of birth";
+                    this.errors.dob = "Invalid date of birth";
                 } else if (dobDate > today) {
-                    this.fieldErrors.dob = "DOB cannot be in the future";
+                    this.errors.dob = "DOB cannot be in the future";
                 } else {
-                    this.fieldErrors.dob = '';
+                    this.errors.dob = '';
                 }
-                this.setError('js_errorDob', this.fieldErrors.dob);
+                this.setError('js_errorDob', this.errors.dob);
 
                 // validate Age
                 let age = formData.get('age').trim();
                 if (age === '') {
-                    this.fieldErrors.age = "Please Enter Your Age";
+                    this.errors.age = "Please Enter Your Age";
                 } else if (!age.match(/^[1-9]\d*$/)) {
-                    this.fieldErrors.age = "Age is not valid";
+                    this.errors.age = "Age is not valid";
                 } else if (parseInt(age) !== calculatedAge) {
-                    this.fieldErrors.age = "Age does not match the date of birth.";
+                    this.errors.age = "Age does not match the date of birth.";
                 } else {
-                    this.fieldErrors.age = '';
+                    this.errors.age = '';
                 }
-                this.setError('js_errorAge', this.fieldErrors.age);
+                this.setError('js_errorAge', this.errors.age);
 
                 // validate gender
                 let gender = formData.get('gender');
                 if (gender === '' || gender === null) {
-                    this.fieldErrors.gender = 'Please Select Your Gender.';
+                    this.errors.gender = 'Please Select Your Gender.';
                 } else {
-                    this.fieldErrors.gender = '';
+                    this.errors.gender = '';
                 }
-                this.setError('js_errorGender', this.fieldErrors.gender);
+                this.setError('js_errorGender', this.errors.gender);
 
                 // validate blood group
                 let bloodGroup = formData.get('bloodGroup');
                 if (bloodGroup === 'choose your blood group') {
-                    this.fieldErrors.bloodGroup = 'Please select your Blood Group';
+                    this.errors.bloodGroup = 'Please select your Blood Group';
                 } else {
-                    this.fieldErrors.bloodGroup = '';
+                    this.errors.bloodGroup = '';
                 }
-                this.setError('js_errorBloodGroup', this.fieldErrors.bloodGroup);
+                this.setError('js_errorBloodGroup', this.errors.bloodGroup);
 
                 // validate role
                 let role = formData.get('role');
                 if (role === 'choose your role') {
-                    this.fieldErrors.role = 'Please select your Role';
+                    this.errors.role = 'Please select your Role';
                 } else {
-                    this.fieldErrors.role = '';
+                    this.errors.role = '';
                 }
-                this.setError('js_errorRole', this.fieldErrors.role);
+                this.setError('js_errorRole', this.errors.role);
 
                 // validate address
                 let currentAddress = formData.get('currentAddress').trim();
                 if (currentAddress === '') {
-                    this.fieldErrors.currentAddress = 'Please Enter Your Address';
+                    this.errors.currentAddress = 'Please Enter Your Address';
                 } else {
-                    this.fieldErrors.currentAddress = '';
+                    this.errors.currentAddress = '';
                 }
-                this.setError('js_errorCurrentAddress', this.fieldErrors.currentAddress);
+                this.setError('js_errorCurrentAddress', this.errors.currentAddress);
 
                 let permanentAddress = formData.get('permanentAddress').trim();
                 if (permanentAddress === '') {
-                    this.fieldErrors.permanentAddress = 'Please Enter Your Address';
+                    this.errors.permanentAddress = 'Please Enter Your Address';
                 } else {
-                    this.fieldErrors.permanentAddress = '';
+                    this.errors.permanentAddress = '';
                 }
-                this.setError('js_errorPermanentAddress', this.fieldErrors.permanentAddress);
+                this.setError('js_errorPermanentAddress', this.errors.permanentAddress);
 
                 // validate file
                 let file = formData.get('file');
                 let searchParams = new URLSearchParams(window.location.search);
                 let userId = parseInt(searchParams.get('id'));
                 if (file.size === 0 && isNaN(userId)) {
-                    this.fieldErrors.file = 'Please Select Your Image';
+                    this.errors.file = 'Please Select Your Image';
                 } else {
-                    this.fieldErrors.file = '';
+                    this.errors.file = '';
                 }
-                this.setError('js_errorImg', this.fieldErrors.file);
+                this.setError('js_errorImg', this.errors.file);
 
-                let hasErrors = Object.values(this.fieldErrors).some(error => error !== '');
+                let hasErrors = Object.values(this.errors).some(error => error !== '');
 
                 return !hasErrors;
             },
@@ -510,7 +509,7 @@
         }
 
         user.onFormSubmit();
-        user.editUserData();
+        user.edit();
 
     </script>
 </body>
