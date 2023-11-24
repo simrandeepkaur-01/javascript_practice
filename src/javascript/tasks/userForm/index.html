@@ -47,9 +47,26 @@
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="123-45-678" autocomplete="off">
                 <p id="js_errornumber" class="js_error  -bottom-5 left-2 text-red-500 text-sm font-medium"></p>
-
             </div>
 
+            <div class=" h-24">
+                <label for="js_phone"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                <input type="password" name="password" id="js_password" placeholder="••••••••"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="123-45-678" autocomplete="off">
+                <p id="js_errornumber" class="js_error  -bottom-5 left-2 text-red-500 text-sm font-medium"></p>
+            </div>
+
+            <div class=" h-24">
+                <label for="js_phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm
+                    Password
+                </label>
+                <input type="password" name="confirmPassword" id="js_confirmPassword" placeholder="••••••••"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="123-45-678" autocomplete="off">
+                <p id="js_errornumber" class="js_error  -bottom-5 left-2 text-red-500 text-sm font-medium"></p>
+            </div>
 
             <fieldset class="flex flex-col  h-24">
                 <legend class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gender</legend>
@@ -129,7 +146,6 @@
                         <input name="file"
                             class="bg-gray-50  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             id="js_file" type="file">
-                        <!-- <p class="absolute bg-gray-50 bottom-8 px-1 w-[75%] py-0.5 right-0 hidden" id="js_imageName"> -->
                         </p>
                     </div>
                 </div>
@@ -153,7 +169,7 @@
         </div>
 
         <!-- fieldset-2 -->
-        <div class="mb-6 gap-4">
+        <div class=" gap-4">
             <div class=" h-28">
                 <label for="js_permanentAddress"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Permanent
@@ -174,23 +190,35 @@
             </div>
         </div>
 
+        <div class="flex items-start mb-6">
+            <div class="flex items-center h-5">
+                <input id="terms" aria-describedby="terms" type="checkbox"
+                    class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800">
+            </div>
+            <div class="ml-3 text-sm">
+                <label for="terms" class="text-gray-800 dark:text-gray-300">Permanent Address is same as Current
+                    Address</label>
+            </div>
+        </div>
+
+
         <button type="submit"
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-16 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
     </form>
 
     <script>
-        const data = {
+        const user = {
             form: document.querySelector('#js_form'),
 
-            onSubmit: function () {
+            onFormSubmit: function () {
                 this.form.addEventListener('submit', (e) => {
                     e.preventDefault();
-                    this.getFormData();
+                    this.getUserData();
                 })
 
             },
 
-            getFormData: function () {
+            getUserData: function () {
                 let formData = new FormData(this.form);
 
                 if (!this.validateForm(formData)) {
@@ -211,36 +239,27 @@
 
                     reader.addEventListener('load', () => {
                         newData.file = reader.result;
-                        this.saveData(newData);
+                        this.storeDataToLocalStorage(newData);
 
                     });
                     reader.readAsDataURL(image);
                 }
             },
 
-            // showFileNameOnEdit: function () {
-            //     document.getElementById('js_file').addEventListener('change', () => {
-            //         let img = document.getElementById('js_avatar');
-            //         alert(img);
-            //         console.log(document.getElementById('js_file').files[0].name); 
-            //     })
-            // },
-
-
-            saveData: function (newData) {
+            storeDataToLocalStorage: function (newData) {
                 let data = localStorage.getItem('formData');
                 let arrOfObj = JSON.parse(data) || [];
 
                 newData.id = Date.now();
 
-                newData.imageName = document.getElementById('js_file').files[0].name;
+                // newData.imageName = document.getElementById('js_file').files[0].name;
 
-                arrOfObj.push(newData)
+                arrOfObj.push(newData);
 
                 localStorage.setItem('formData', JSON.stringify(arrOfObj));
             },
 
-            editData: function () {
+            editUserData: function () {
                 let searchParams = new URLSearchParams(window.location.search);
                 let userId = parseInt(searchParams.get('id'));
 
@@ -284,17 +303,14 @@
 
                     this.form.addEventListener('submit', (e) => {
                         e.preventDefault();
-                        this.updateFormData(arrOfObj, userObjIndex);
-                        // let errorElement = document.getElementById('js_errorImg');
-                        // errorElement.innerHTML = '';
-                        // window.location.href = 'result.html';
-
+                        this.updateUserData(arrOfObj, userObjIndex);
+                       
                     });
 
                 }
             },
 
-            updateFormData: function (arrOfObj, userObjIndex) {
+            updateUserData: function (arrOfObj, userObjIndex) {
                 let formData = new FormData(this.form);
 
                 if (!this.validateForm(formData)) {
@@ -493,10 +509,9 @@
             }
         }
 
-        data.onSubmit();
-        data.editData();
+        user.onFormSubmit();
+        user.editUserData();
 
-        // data.showFileNameOnEdit();
     </script>
 </body>
 

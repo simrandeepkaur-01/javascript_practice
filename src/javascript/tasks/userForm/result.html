@@ -9,18 +9,37 @@
 </head>
 
 <body class="flex justify-center items-center  flex-col bg-gray-100">
-    <nav class="w-screen h-20 flex items-center justify-between bg-gray-800 px-24">
-        <input id="js_search" type="search" class=" w-[400px] px-3 py-1.5 rounded-full ml-28 placeholder:text-gray-800"
-            placeholder="Search Your User Name...">
-        <button type="button" id="js_addNewUser"
-            class="bg-white relative text-gray-800 px-16 py-1.5 rounded-lg mr-12 text-md font-medium">Add New
-            User
-            <svg class="w-6 h-6 absolute top-1/2 -translate-y-1/2 left-9 text-gray-800"
-                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
-            </svg></button>
+    <!-- navigation bar -->
+    <nav class="w-screen h-20 flex items-center  bg-gray-800">
+        <div class="w-1/2 ">
+            <input id="js_search" type="search"
+                class=" w-[400px] px-3 py-1.5 rounded-full ml-28 placeholder:text-gray-800"
+                placeholder="Search Your User Name...">
+        </div>
+        <div class="flex space-x-4 flex-1 justify-end mr-6">
+            <!-- add user button -->
+            <div class="flex items-center">
+                <button type="button" id="js_addNewUser"
+                    class="bg-white relative text-gray-800 px-16 py-1.5 rounded-lg  text-md font-medium mr-12">Add New
+                    User
+                    <svg class="w-6 h-6 absolute top-1/2 -translate-y-1/2 left-9 text-gray-800"
+                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
+                    </svg></button>
+            </div>
+
+            <!-- current user info -->
+            <div class=" flex flex-col justify-center items-center">
+                <img class="w-8 h-8 rounded-full"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaQBkObFHtWztejWTFJJFCl7C0WajxHPAlTg&usqp=CAU"
+                    alt="user Image">
+                <p id="js_userName" class="text-white">username <span id="js_userRole">(role)</span></p>
+            </div>
+
+        </div>
     </nav>
+
     <table id="js_table" class="text-center w-10/12 rounded-lg shadow-lg shadow-gray-400 mt-16">
         <thead class="w-full h-16  bg-gray-800 rounded-full text-white">
             <tr>
@@ -40,7 +59,7 @@
         const getData = {
             arrOfObj: JSON.parse(localStorage.getItem('formData')) || [],
 
-            displayData: function () {
+            render: function () {
                 const tbody = document.getElementById('js_tbody');
                 tbody.innerHTML = '';
                 tbody.className = 'divide-y divide-y-red-800 ';
@@ -112,11 +131,11 @@
             debounce: function (func, delay) {
                 let timer;
                 return function () {
-                    const context = this;
+                    const search = this;
                     const args = arguments;
                     clearTimeout(timer);
                     timer = setTimeout(function () {
-                        func.apply(context, args);
+                        func.apply(search, args);
                     }, delay);
                 };
             },
@@ -124,7 +143,7 @@
             searchUser: function () {
                 const searchInput = document.getElementById('js_search');
                 searchInput.addEventListener('input', this.debounce(() => {
-                    this.displayData();
+                    this.render();
                 }, 500));
             },
 
@@ -136,7 +155,7 @@
             }
         }
 
-        getData.displayData();
+        getData.render();
         getData.searchUser();
         getData.AddUser();
     </script>
