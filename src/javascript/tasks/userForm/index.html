@@ -223,7 +223,7 @@
 
                     this.storeBase64Image(formData, newData);
 
-                    window.location.href = 'result.html';
+                    // window.location.href = 'result.html';
                 })
 
             },
@@ -329,7 +329,7 @@
 
                         arrOfObj[userObjIndex] = updatedData;
                         localStorage.setItem('formData', JSON.stringify(arrOfObj));
-                        window.location.href = 'result.html';
+                        // window.location.href = 'result.html';
                     });
 
                     reader.readAsDataURL(image);
@@ -339,7 +339,7 @@
 
                     arrOfObj[userObjIndex] = updatedData;
                     localStorage.setItem('formData', JSON.stringify(arrOfObj));
-                    window.location.href = 'result.html';
+                    // window.location.href = 'result.html';
                 }
             },
 
@@ -408,6 +408,34 @@
                     this.errors.number = '';
                 }
                 this.setError('js_errornumber', this.errors.number);
+
+                // validate password
+                let password = formData.get('password').trim();
+                if (password === '') {
+                    this.errors.password = 'Password must not be empty.';
+                } else if (password.length < 8) {
+                    this.errors.password = 'Password length must be at least 8 characters';
+                } else if (password.length > 15) {
+                    this.errors.password = 'Password length must not exceed 15 characters';
+                } else if (!password.match(/[A-Za-z]/) || !password.match(/[0-9]/)) {
+                    this.errors.password = 'Password must contain both letters and numbers';
+                } else if (!password.match(/[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/)) {
+                    this.errors.password = 'Password must contain at least one special character';
+                } else {
+                    this.errors.password = '';
+                }
+                this.setError('js_errorPassword', this.errors.password);
+
+                // validate Confirm Password
+                let confirmPassword = formData.get('confirmPassword').trim();
+                if (confirmPassword === '') {
+                    this.errors.confirmPassword = 'Confirm Password must not be empty';
+                } else if (confirmPassword !== password) {
+                    this.errors.confirmPassword = 'Confirm Password must be the same as Password';
+                } else {
+                    this.errors.confirmPassword = '';
+                }
+                this.setError('js_errorConfirmPassword', this.errors.confirmPassword);
 
                 // validate DOB
                 let dob = formData.get('dob').trim();

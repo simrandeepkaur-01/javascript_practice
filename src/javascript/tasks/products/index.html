@@ -6,13 +6,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Page</title>
     <link rel="stylesheet" href="../../../../dist/output.css">
+
 </head>
 
 <body>
+    <nav class="bg-gray-700 py-6">
+        <div class="w-[550px] relative ml-8">
+            <input id="js_searchInput"
+                class="mx-auto w-full rounded-lg p-1.5 px-3 text-lg dark:bg-gray-300 placeholder:text-gray-400 dark:placeholder:text-gray-700 "
+                type="search" placeholder="Search For Products here..." autocomplete="off">
+            <span>
+                <svg class="w-6 h-6 absolute top-1/2 right-3 -translate-y-1/2 text-[#2874f0] dark:text-indigo-800"
+                    width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M18.319 14.4326C20.7628 11.2941 20.542 6.75347 17.6569 3.86829C14.5327 0.744098 9.46734 0.744098 6.34315 3.86829C3.21895 6.99249 3.21895 12.0578 6.34315 15.182C9.22833 18.0672 13.769 18.2879 16.9075 15.8442C16.921 15.8595 16.9351 15.8745 16.9497 15.8891L21.1924 20.1317C21.5829 20.5223 22.2161 20.5223 22.6066 20.1317C22.9971 19.7412 22.9971 19.1081 22.6066 18.7175L18.364 14.4749C18.3493 14.4603 18.3343 14.4462 18.319 14.4326ZM16.2426 5.28251C18.5858 7.62565 18.5858 11.4246 16.2426 13.7678C13.8995 16.1109 10.1005 16.1109 7.75736 13.7678C5.41421 11.4246 5.41421 7.62565 7.75736 5.28251C10.1005 2.93936 13.8995 2.93936 16.2426 5.28251Z"
+                        fill="currentColor"></path>
+                </svg>
+            </span>
 
+
+            <!-- search List -->
+            <ul id="js_searchProduct"
+                class="mx-auto w-[550px] max-h-[360px] bg-white dark:bg-gray-200 overflow-hidden rounded-lg mt-1 absolute shadow-md shadow-gray-400  focus:outline-none">
+            </ul>
+        </div>
+    </nav>
     <ul id="js_products" class="p-6 flex flex-wrap gap-8  justify-center items-center"></ul>
 
     <script>
+        const searchProducts = {
+            input: document.querySelector('#js_searchInput'),
+            listContainer: document.querySelector('#js_searchProduct'),
+
+            debounce: function (func, delay) {
+                let timer;
+                return function (...args) {
+                    clearTimeout(timer);
+                    timer = setTimeout(() => func.apply(this, args), delay);
+                }
+            },
+
+            search: function () {
+                this.input.addEventListener('input', this.debounce(() => this.render(), 300));
+                //hide list on click on screen
+                document.addEventListener('click', (e) => {
+                    if (!this.listContainer.contains(e.target)) {
+                        this.listContainer.innerHTML = '';
+                        this.input.value = '';
+                    }
+                })
+            },
+
+            render: function () {
+                const products = JSON.parse(localStorage.getItem('products'));
+                let searchedProduct = '';
+
+
+                products.forEach(product => {
+                    const productTitle = product.title.trim().toLowerCase();
+                    const productCategory = product.category.trim().toLowerCase();
+
+                    const searchedValue = this.input.value.trim().toLowerCase();
+
+
+                    if (productCategory.includes(searchedValue) || productTitle.includes(searchedValue)) {
+                        searchedProduct += `<li class='py-2 px-2.5 cursor-pointer flex items-center hover:bg-[#f2f5fa] dark:bg-gray-300 dark:hover:bg-slate-200 dark:border-b dark:border-gray-200 font-medium'>
+                            <img src='${product.image}' class="mr-2 h-11 w-9">
+                            <a href="#">${productTitle}</a></li>`;
+                    }
+                })
+                this.listContainer.innerHTML = searchedProduct;
+
+                this.listContainer.addEventListener('click', (e) => {
+                    if (e.target.tagName === 'A') {
+                        this.input.value = e.target.textContent;
+                        // this.listContainer.innerHTML = '';
+                    }
+                })
+            }
+
+        }
+        searchProducts.search()
+
         const products = {
             render: function () {
                 const fromLocalStorage = this.getFromLocalStorage();
@@ -22,7 +97,7 @@
                 fromLocalStorage.forEach((product) => {
                     products += `<li
                         class=" w-80 hover:shadow-md hover:shadow-gray-400 rounded-lg  flex justify-center items-center flex-col cursor-pointer pt-4 h-[400px]" >
-                         <!-- image -->
+                         <!-- image --> 
                         <div class=" w-56 h-56">
                             <img class="w-full h-full object-fill" src=${product.image}
                                 alt="Product Image">
