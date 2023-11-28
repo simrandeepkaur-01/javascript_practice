@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../../../../dist/output.css">
 </head>
 
-<body class="flex justify-center items-center flex-col w-screen ">
+<body class="flex justify-center items-center flex-col">
 
     <form action="#" method="post" id="js_form" name="form" class="w-1/2 shadow-md shadow-gray-400 rounded-lg p-4">
         <div class="grid gap-x-5 mt-2 mb-2 md:grid-cols-2">
@@ -49,24 +49,25 @@
                 <p id="js_errornumber" class="js_error  -bottom-5 left-2 text-red-500 text-sm font-medium"></p>
             </div>
 
-            <!-- <div class=" h-24">
-                <label for="js_phone"
+            <div class=" h-24">
+                <label for="js_password"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                 <input type="password" name="password" id="js_password" placeholder="••••••••"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="123-45-678" autocomplete="off">
-                <p id="js_errornumber" class="js_error  -bottom-5 left-2 text-red-500 text-sm font-medium"></p>
-            </div> -->
+                <p id="js_errorPassword" class="js_error  -bottom-5 left-2 text-red-500 text-sm font-medium"></p>
+            </div>
 
-            <!-- <div class=" h-24">
-                <label for="js_phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm
+            <div class=" h-24">
+                <label for="js_confirmPassword"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm
                     Password
                 </label>
                 <input type="password" name="confirmPassword" id="js_confirmPassword" placeholder="••••••••"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="123-45-678" autocomplete="off">
-                <p id="js_errornumber" class="js_error  -bottom-5 left-2 text-red-500 text-sm font-medium"></p>
-            </div> -->
+                <p id="js_errorConfirmPassword" class="js_error  -bottom-5 left-2 text-red-500 text-sm font-medium"></p>
+            </div>
 
             <fieldset class="flex flex-col  h-24">
                 <legend class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gender</legend>
@@ -212,22 +213,19 @@
             onFormSubmit: function () {
                 this.form.addEventListener('submit', (e) => {
                     e.preventDefault();
-                    this.get();
+
+                    let formData = new FormData(this.form);
+
+                    if (!this.validateForm(formData)) {
+                        return;
+                    }
+                    let newData = Object.fromEntries(formData);
+
+                    this.storeBase64Image(formData, newData);
+
+                    window.location.href = 'result.html';
                 })
 
-            },
-
-            get: function () {
-                let formData = new FormData(this.form);
-
-                if (!this.validateForm(formData)) {
-                    return;
-                }
-
-                let newData = Object.fromEntries(formData);
-
-                this.storeBase64Image(formData, newData);
-                window.location.href = 'result.html';
             },
 
             storeBase64Image: function (formData, newData) {
@@ -271,16 +269,16 @@
                 if (userObjIndex !== -1) {
                     let userObj = arrOfObj[userObjIndex];
 
-                    this.setFormFieldValue('js_firstName', userObj.firstName);
-                    this.setFormFieldValue('js_lastName', userObj.lastName);
-                    this.setFormFieldValue('js_email', userObj.email);
-                    this.setFormFieldValue('js_phone', userObj.number);
-                    this.setFormFieldValue('js_dob', userObj.dob);
-                    this.setFormFieldValue('js_bloodGroup', userObj.bloodGroup);
-                    this.setFormFieldValue('js_role', userObj.role);
-                    this.setFormFieldValue('js_age', userObj.age);
-                    this.setFormFieldValue('js_permanentAddress', userObj.permanentAddress);
-                    this.setFormFieldValue('js_currentAddress', userObj.currentAddress);
+                    this.setField('js_firstName', userObj.firstName);
+                    this.setField('js_lastName', userObj.lastName);
+                    this.setField('js_email', userObj.email);
+                    this.setField('js_phone', userObj.number);
+                    this.setField('js_dob', userObj.dob);
+                    this.setField('js_bloodGroup', userObj.bloodGroup);
+                    this.setField('js_role', userObj.role);
+                    this.setField('js_age', userObj.age);
+                    this.setField('js_permanentAddress', userObj.permanentAddress);
+                    this.setField('js_currentAddress', userObj.currentAddress);
 
                     let UserAvatar = document.getElementById('js_avatar');
                     UserAvatar.src = userObj.file;
@@ -303,7 +301,7 @@
                     this.form.addEventListener('submit', (e) => {
                         e.preventDefault();
                         this.update(arrOfObj, userObjIndex);
-                       
+
                     });
 
                 }
@@ -319,7 +317,6 @@
                 let updatedData = Object.fromEntries(formData);
 
                 updatedData.id = arrOfObj[userObjIndex].id;
-
 
                 let image = formData.get('file');
 
@@ -346,7 +343,7 @@
                 }
             },
 
-            setFormFieldValue: function (fieldId, value) {
+            setField: function (fieldId, value) {
                 let field = document.getElementById(fieldId);
                 if (field) {
                     field.value = value;

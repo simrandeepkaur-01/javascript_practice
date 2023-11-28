@@ -64,10 +64,10 @@
                 tbody.innerHTML = '';
                 tbody.className = 'divide-y divide-y-red-800 ';
 
-                const searchTerm = document.getElementById('js_search').value.toLowerCase();
+                const searchTerm = document.getElementById('js_search').value.toLowerCase().trim();
 
                 this.getUserFromLocalStorage.forEach(element => {
-                    const userName = element.firstName.toLowerCase();
+                    const userName = element.firstName.trim().toLowerCase();
                     if (userName.includes(searchTerm)) {
 
                         let tr = document.createElement('tr');
@@ -127,37 +127,28 @@
                 element.textContent = textContent;
                 return element;
             },
-
-            debounce: function (func, delay) {
+            debounce(func, delay) {
                 let timer;
-                return function () {
-                    const search = this;
-                    const args = arguments;
+                return function (...args) {
                     clearTimeout(timer);
-                    timer = setTimeout(function () {
-                        func.apply(search, args);
-                    }, delay);
+                    timer = setTimeout(() => func.apply(this, args), delay);
                 };
             },
 
-            search: function () {
+            search() {
                 const searchInput = document.getElementById('js_search');
-                searchInput.addEventListener('input', this.debounce(() => {
-                    this.render();
-                }, 500));
+                searchInput.addEventListener('input', this.debounce(() => this.render(), 500));
             },
 
-            display: function () {
+            addNew() {
                 const addUserBtn = document.getElementById('js_addNewUser');
-                addUserBtn.addEventListener('click', () => {
-                    window.location.href = "./index.html";
-                })
+                addUserBtn.addEventListener('click', () => window.location.href = "./index.html");
             }
         }
 
         user.render();
         user.search();
-        user.display();
+        user.addNew();
     </script>
 </body>
 
