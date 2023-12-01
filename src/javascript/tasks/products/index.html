@@ -4,207 +4,516 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Page</title>
+    <title>Document</title>
     <link rel="stylesheet" href="../../../../dist/output.css">
-
 </head>
 
 <body>
-    <nav class="bg-gray-500 py-5">
-        <div class="w-[550px] relative mx-auto">
-            <input id="js_searchInput"
-                class="mx-auto w-full rounded-lg p-1.5 px-3 text-lg dark:bg-gray-300 placeholder:text-gray-400 dark:placeholder:text-gray-700 "
-                type="search" placeholder="Search For Products here..." autocomplete="off">
-            <span>
-                <svg class="w-6 h-6 absolute top-1/2 right-3 -translate-y-1/2 text-[#2874f0] dark:text-indigo-800"
-                    width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M18.319 14.4326C20.7628 11.2941 20.542 6.75347 17.6569 3.86829C14.5327 0.744098 9.46734 0.744098 6.34315 3.86829C3.21895 6.99249 3.21895 12.0578 6.34315 15.182C9.22833 18.0672 13.769 18.2879 16.9075 15.8442C16.921 15.8595 16.9351 15.8745 16.9497 15.8891L21.1924 20.1317C21.5829 20.5223 22.2161 20.5223 22.6066 20.1317C22.9971 19.7412 22.9971 19.1081 22.6066 18.7175L18.364 14.4749C18.3493 14.4603 18.3343 14.4462 18.319 14.4326ZM16.2426 5.28251C18.5858 7.62565 18.5858 11.4246 16.2426 13.7678C13.8995 16.1109 10.1005 16.1109 7.75736 13.7678C5.41421 11.4246 5.41421 7.62565 7.75736 5.28251C10.1005 2.93936 13.8995 2.93936 16.2426 5.28251Z"
-                        fill="currentColor"></path>
-                </svg>
-            </span>
+    <header class="mb-20">
+        <!-- Navigation Bar -->
+        <nav class=" bg-[#2370f4] flex items-center dark:bg-indigo-800 fixed w-full top-0 left-0 z-20 xl:px-36 py-4">
+            <ul class="flex justify-around w-full flex-wrap gap-4 px-2">
+                <!-- logo -->
+                <li class="flex flex-col ">
+                    <img width="75"
+                        src="	https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/flipkart-plus_8d85f4.png"
+                        alt="Flipkart" title="Flipkart"><a
+                        class="text-white italic flex w-4 h-4 items-center space-x-1">Explore
+                        <span class="text-[#ffe11b] ml-0.5">Plus</span>
+                        <img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/plus_aef861.png"
+                            alt="Flipkart-plus"></a>
+                </li>
 
-            <!-- search List -->
-            <ul id="js_searchProduct"
-                class="mx-auto w-[550px] max-h-[360px] bg-white dark:bg-gray-200 overflow-hidden rounded-lg mt-1 absolute shadow-md shadow-gray-400  focus:outline-none">
+
+                <!-- search bar -->
+                <li class="w-96 xl:w-[550px] relative ">
+                    <input id="js_searchInput"
+                        class="mx-auto w-full rounded-lg p-1.5 px-3 text-lg dark:bg-gray-300 placeholder:text-gray-400 dark:placeholder:text-gray-700 "
+                        type="search" placeholder="Search For Products, Brands and More" autocomplete="off">
+                    <span>
+                        <svg class="w-6 h-6 absolute top-1/2 right-3 -translate-y-1/2 text-[#2874f0] dark:text-indigo-800"
+                            width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M18.319 14.4326C20.7628 11.2941 20.542 6.75347 17.6569 3.86829C14.5327 0.744098 9.46734 0.744098 6.34315 3.86829C3.21895 6.99249 3.21895 12.0578 6.34315 15.182C9.22833 18.0672 13.769 18.2879 16.9075 15.8442C16.921 15.8595 16.9351 15.8745 16.9497 15.8891L21.1924 20.1317C21.5829 20.5223 22.2161 20.5223 22.6066 20.1317C22.9971 19.7412 22.9971 19.1081 22.6066 18.7175L18.364 14.4749C18.3493 14.4603 18.3343 14.4462 18.319 14.4326ZM16.2426 5.28251C18.5858 7.62565 18.5858 11.4246 16.2426 13.7678C13.8995 16.1109 10.1005 16.1109 7.75736 13.7678C5.41421 11.4246 5.41421 7.62565 7.75736 5.28251C10.1005 2.93936 13.8995 2.93936 16.2426 5.28251Z"
+                                fill="currentColor"></path>
+                        </svg>
+                    </span>
+
+
+                    <!-- search List -->
+                    <ul id="js_searchProduct"
+                        class="mx-auto w-[550px] max-h-[360px] bg-white dark:bg-gray-200 overflow-hidden rounded-lg mt-1 absolute shadow-md shadow-gray-400  focus:outline-none">
+                    </ul>
+                </li>
+
+                <!-- <li class="flex gap-2 justify-center items-center">
+                    User Image
+                    <div class="w-8 h-8">
+                        <img id="js_userImage" class="w-full h-full object-cover rounded-full"
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaQBkObFHtWztejWTFJJFCl7C0WajxHPAlTg&usqp=CAU"
+                            alt="User Image">
+                    </div>
+                    <span class="text-white w-24 font-medium truncate">userName </span>
+                </li> -->
+
+                <li class="relative">
+                    <select id="js_categoryFilter"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="all">All Categories</option>
+                        <option value="smartphones">Smartphones</option>
+                        <option value="laptops">Laptops</option>
+                        <option value="fragrances">Fragrances</option>
+                        <option value="skincare">Skincare</option>
+                        <option value="groceries">Groceries</option>
+                        <option value="home-decoration">Home Decoration</option>
+                    </select>
+                </li>
+
+                <!-- Become a Seller -->
+                <li class="flex gap-2 justify-center items-center">
+                    <!-- <a href="addProduct.html" class="text-white font-medium">Become a Seller</a> -->
+                    <button id="js_showDialog" type="button" aria-label="Add New Product"
+                        class="text-white font-medium">Become a Seller</button>
+
+                    <dialog id="js_addProductDialog" class="rounded-lg w-1/2">
+                        <form action="#" id="js_addProduct"
+                            class="shadow-md shadow-gray-400 rounded-lg p-12 md:px-8 md:py-2">
+
+                            <span id="js_closeDialog" class="ml-[670px] rounded-md bg-slate-200  p-1 fixed">
+                                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15"
+                                    fill="currentColor">
+                                    <path
+                                        d="M3.64 2.27L7.5 6.13L11.34 2.29C11.5114 2.1076 11.7497 2.0029 12 2C12.5523 2 13 2.4477 13 3C13.0047 3.2478 12.907 3.4866 12.73 3.66L8.84 7.5L12.73 11.39C12.8948 11.5512 12.9915 11.7696 13 12C13 12.5523 12.5523 13 12 13C11.7423 13.0107 11.492 12.9127 11.31 12.73L7.5 8.87L3.65 12.72C3.4793 12.8963 3.2453 12.9971 3 13C2.4477 13 2 12.5523 2 12C1.9953 11.7522 2.093 11.5134 2.27 11.34L6.16 7.5L2.27 3.61C2.1052 3.4488 2.0085 3.2304 2 3C2 2.4477 2.4477 2 3 2C3.2404 2.0029 3.4701 2.0998 3.64 2.27Z">
+                                    </path>
+                                </svg>
+                            </span>
+
+                            <h2 class="text-center font-medium py-2 mb-2 text-3xl text-slate-700">Add New Product</h2>
+
+                            <!-- title -->
+                            <div class="h-24">
+                                <label for="js_title"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
+                                <input type="text" id="js_title" name="title"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Product Name" autocomplete="off">
+                                <p id="js_errorTitle" class="-bottom-5 left-2 text-red-500 text-sm font-medium"></p>
+                            </div>
+
+                            <!-- description -->
+                            <div class="h-24">
+                                <label for="js_description"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                                <input type="text" id="js_description" name="description"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Product Description " autocomplete="off">
+                                <p id="js_errorDescription" class="-bottom-5 left-2 text-red-500 text-sm font-medium">
+                                </p>
+                            </div>
+
+                            <div class="grid lg:grid-cols-2 gap-x-6">
+                                <!-- discountPercentage -->
+                                <div class="h-24">
+                                    <label for="js_discountPercentage"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Discount
+                                        Percentage</label>
+                                    <input type="number" id="js_discountPercentage" name="discountPercentage"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="12.05" autocomplete="off">
+                                    <p id="js_errorDiscountPercentage"
+                                        class="-bottom-5 left-2 text-red-500 text-sm font-medium">
+                                    </p>
+                                </div>
+
+                                <!-- price -->
+                                <div class="h-24">
+                                    <label for="js_price"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
+                                    <input type="number" id="js_price" name="price"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="1250" autocomplete="off">
+                                    <p id="js_errorPrice" class="-bottom-5 left-2 text-red-500 text-sm font-medium"></p>
+                                </div>
+
+                                <!-- rating -->
+                                <div class="h-24">
+                                    <label for="js_rating"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rating</label>
+                                    <input type="text" id="js_rating" name="rating"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="" autocomplete="off" value="0">
+                                    <p id="js_errorRating" class="-bottom-5 left-2 text-red-500 text-sm font-medium">
+                                    </p>
+                                </div>
+
+                                <!-- stock -->
+                                <div class="h-24">
+                                    <label for="js_stock"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stock</label>
+                                    <input type="text" id="js_stock" name="stock"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="100" autocomplete="off">
+                                    <p id="js_errorStock" class="-bottom-5 left-2 text-red-500 text-sm font-medium"></p>
+                                </div>
+
+                                <!-- brand -->
+                                <div class="h-24">
+                                    <label for="js_brand"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Brand</label>
+                                    <input type="text" id="js_brand" name="brand"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="Brand Name" autocomplete="off">
+                                    <p id="js_errorBrand" class="-bottom-5 left-2 text-red-500 text-sm font-medium"></p>
+                                </div>
+
+                                <!-- category -->
+                                <div class=" h-24">
+                                    <label for="js_category"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product's
+                                        Category</label>
+                                    <select id="js_category" name="category"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option value="choose your product's category" class="text-gray-500" selected>
+                                            Product's
+                                            Category
+                                        </option>
+                                        <option value="smartphones">smartphones</option>
+                                        <option value="laptops">laptops</option>
+                                        <option value="fragrances">fragrances</option>
+                                        <option value="skincare">skincare</option>
+                                        <option value="groceries">groceries</option>
+                                        <option value="home-decoration">home-decoration</option>
+                                        <option value="furniture">furniture</option>
+                                        <option value="tops">tops</option>
+                                        <option value="womens-dresses">womens-dresses</option>
+                                        <option value="womens-shoes">womens-shoes</option>
+                                        <option value="mens-shirts">mens-shirts</option>
+                                        <option value="mens-shoes">mens-shoes</option>
+                                        <option value="mens-watches">mens-watches</option>
+                                        <option value="womens-watches">womens-watches</option>
+                                        <option value="womens-bags">womens-bags</option>
+                                        <option value="womens-jewellery">womens-jewellery</option>
+                                        <option value="">sunglasses</option>
+                                        <option value="sunglasses">automotive</option>
+                                        <option value="motorcycle">motorcycle</option>
+                                        <option value="lighting">lighting</option>
+                                        <option value="other">other</option>
+                                    </select>
+                                    <p id="js_errorCategory" class="-bottom-5 left-2 text-red-500 text-sm font-medium">
+                                    </p>
+                                </div>
+
+                                <!-- thumbnail -->
+                                <div class="h-24">
+                                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                        for="js_thumbnail">
+                                        Thumbnail</label>
+                                    <input name="thumbnail"
+                                        class="bg-gray-50  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        id="js_thumbnail" type="file">
+
+                                    <p id="js_errorThumbnail" class="-bottom-5 left-2 text-red-500 text-sm font-medium">
+                                    </p>
+                                </div>
+
+                                <!-- images -->
+                                <div class="h-24">
+                                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                        for="js_images">Select
+                                        Multiple Images</label>
+                                    <input id="js_images" type="file" name="images" multiple accept="images/*"
+                                        class="bg-gray-50  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+                                    <!-- <p id="js_errorImages" class="-bottom-5 left-2 text-red-500 text-sm font-medium"></p> -->
+                                </div>
+                                <!-- preview images -->
+                            </div>
+                            <ul id="js_previewImages" class=" flex flex-wrap gap-4 my-2"></ul>
+
+                            <button type="submit"
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-16 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                        </form>
+                    </dialog>
+                </li>
+
+                <!-- cart -->
+                <li class="flex gap-2 justify-center items-center">
+                    <div class="relative">
+                        <svg class="w-7 h-7   text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"
+                            fill="currentColor">
+                            <path
+                                d="M220.61,60.16A6,6,0,0,0,216,58H53L47.83,29.5A14,14,0,0,0,34.05,18H16a6,6,0,0,0,0,12h18a2,2,0,0,1,2,1.64l25.51,140.3a21.93,21.93,0,0,0,6.24,11.77A26,26,0,1,0,105.89,190h52.22A26,26,0,1,0,180,178H83.17a10,10,0,0,1-9.84-8.21L69.73,150H188.1a22,22,0,0,0,21.65-18.06L221.9,65.07A6,6,0,0,0,220.61,60.16ZM98,204a14,14,0,1,1-14-14A14,14,0,0,1,98,204Zm96,0a14,14,0,1,1-14-14A14,14,0,0,1,194,204Zm3.94-74.21A10,10,0,0,1,188.1,138H67.55L55.19,70H208.81Z">
+                            </path>
+                        </svg>
+
+                        <span
+                            class="px-1 w-6 h-6 absolute -top-3 -right-1 flex items-center justify-center rounded-full  bg-red-500 text-white">15</span>
+                    </div>
+                    <span class="text-white text-lg">Cart</span>
+                </li>
             </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Product Listing -->
+        <ul id="js_products" class="p-6 flex flex-wrap gap-8  justify-center items-center"></ul>
+    </main>
+
+    <!-- footer -->
+    <footer>
+        <div class="bg-black bg-opacity-90 text-white text-sm flex justify-around py-6">
+            <div><a href="#" aria-label="Become A Seller">Become a Seller</a></div>
+            <div><a href="#" aria-label="Advertise">Advertise</a></div>
+            <div><a href="#" aria-label="Gift Cards">Gift Cards</a></div>
+            <div><a href="#" aria-label="Help Center">Help Center</a></div>
+            <div><span>© 2007-2023</span><span>Flipkart.com</span></div>
         </div>
-    </nav>
-    <ul id="js_products" class="p-6 flex flex-wrap gap-8  justify-center items-center"></ul>
+    </footer>
 
     <script>
-        const searchProducts = {
-            input: document.querySelector('#js_searchInput'),
-            listContainer: document.querySelector('#js_searchProduct'),
+        (function () {
+            const addNewProduct = {
 
-            debounce: function (func, delay) {
-                let timer;
-                return function (...args) {
-                    clearTimeout(timer);
-                    timer = setTimeout(() => func.apply(this, args), delay);
+                addProductDialog: document.querySelector('#js_addProductDialog'),
+                showDialog: document.querySelector('#js_showDialog'),
+                closeDialog: document.querySelector('#js_closeDialog'),
+
+                renderForm: function () {
+                    this.showDialog.addEventListener('click', () => {
+                        this.addProductDialog.showModal();
+                    })
+
+                    this.closeDialog.addEventListener('click', () => {
+                        this.addProductDialog.close();
+                    })
+
+                    this.previewUploadedImages();
+                },
+
+                previewUploadedImages: function () {
+                    const files = document.querySelector('#js_images');
+                    const previewContainer = document.querySelector('#js_previewImages');
+
+                    files.addEventListener('change', (event) => {
+                        const uploadedFiles = files.files;
+                        for (file of uploadedFiles) {
+                            const reader = new FileReader();
+
+                            reader.addEventListener('load', function (e) {
+                                const img = document.createElement('img');
+                                img.src = e.target.result;
+                                img.className = 'w-16 h-16';
+                                previewContainer.appendChild(img);
+                            });
+                            reader.readAsDataURL(file);
+                        }
+                    })
+                },
+
+                onFormSubmit: function () {
+                    const form = document.querySelector('#js_addProduct');
+                    form.addEventListener('submit', async (e) => {
+                        e.preventDefault();
+                        const formData = new FormData(form);
+
+                        formData.append('discountPercentage', formData.get('discountPercentage').toString());
+
+                        const newProduct = Object.fromEntries(formData);
+                        const response = await products.postProducts("https://dummyjson.com/products/add", newProduct);
+
+                        // this.addProductDialog.close();
+                        // window.location.href = './new.html';
+                    })
                 }
-            },
+            };
+            addNewProduct.renderForm();
+            addNewProduct.onFormSubmit();
 
-            search: function () {
-                this.input.addEventListener('input', this.debounce(() => this.render(), 300));
-                //hide list on click on screen
-                document.addEventListener('click', (e) => {
-                    if (!this.listContainer.contains(e.target)) {
-                        this.listContainer.innerHTML = '';
-                        this.input.value = '';
-                    }
-                })
-            },
+            const products = {
+                render: function (productsFromLocalStorage) {
+                    const productsContainer = document.querySelector('#js_products');
+                    let products = '';
 
-            render: function () {
-                const products = JSON.parse(localStorage.getItem('products'));
-                let searchedProduct = '';
-
-
-                products.forEach(product => {
-                    const productTitle = product.title.trim().toLowerCase();
-                    const productCategory = product.category.trim().toLowerCase();
-
-                    const searchedValue = this.input.value.trim().toLowerCase();
-
-
-                    if (productCategory.includes(searchedValue) || productTitle.includes(searchedValue)) {
-                        searchedProduct += `<li class='py-2 px-2.5 cursor-pointer flex items-center hover:bg-[#f2f5fa] dark:bg-gray-300 dark:hover:bg-slate-200 dark:border-b dark:border-gray-200 font-medium'>
-                            <img src='${product.image}' class="mr-2 h-11 w-9">
-                            <a href="#">${productTitle}</a></li>`;
-                    }
-                })
-                this.listContainer.innerHTML = searchedProduct;
-
-                this.listContainer.addEventListener('click', (e) => {
-                    if (e.target.tagName === 'A') {
-                        this.input.value = e.target.textContent;
-                        // this.listContainer.innerHTML = '';
-                    }
-                })
-            }
-
-        }
-        searchProducts.search()
-
-        const products = {
-            render: function () {
-                const fromLocalStorage = this.getFromLocalStorage();
-
-                const productsContainer = document.querySelector('#js_products');
-                let products = '';
-                fromLocalStorage.forEach((product) => {
-                    products += `<li
+                    productsFromLocalStorage.forEach((product) => {
+                        const discountedPrice = product.price - (product.price * (product.discountPercentage / 100));
+                        // console.log(product.discountPercentage)
+                        // console.log(product.category)
+                        products += `<li
                         class=" w-80 hover:shadow-md hover:shadow-gray-400 rounded-lg  flex justify-center items-center flex-col cursor-pointer pt-4 h-[400px]" >
-                         <!-- image --> 
+                         <!-- image -->
                         <div class=" w-56 h-56">
-                            <img class="w-full h-full object-fill" src=${product.image}
+                            <img class="w-full h-full object-fill" src=${product.thumbnail}
                                 alt="Product Image">
                         </div>
 
                         <!--description -->
                         <div class="p-4 space-y-2">
                             <h2 class="line-clamp-2">${product.title}</h2>
+                            <!-- rating -->
+                            <div class="flex gap-2">
+                                <div class="bg-green-700 text-white pl-2  py-0.5 rounded-sm text-sm relative w-14 ">${product.rating}
+                                    <svg class="w-4 h-4 text-white absolute bottom-0 right-1 top-1/2 -translate-y-1/2"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                        <path
+                                            d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <!-- <span class="text-gray-500">(${product.rating.count})</span> -->
+                            </div>
+
                             <!-- price -->
-                            <div class="flex space-x-2 items-center"><span class="font-semibold">&#8377;${product.price}</span></div>
-                            <!-- category -->
-                            <div class="">Category:<span class="font-medium capitalize">${product.category}</span></div>
+                            <div class="flex space-x-2 items-center"><span class="font-semibold">&#8377;${discountedPrice.toFixed(2)}</span>
+                                <span class="text-gray-500 line-through">&#8377;${Number(product.price)}</span>
+                                <div class="text-green-700 font-medium text-sm"><span>${product.discountPercentage}</span> <span>off</span></div>
+                            </div>
                         </div>
                         </li>`;
-                })
-                productsContainer.innerHTML = products;
-            },
-            add: async function () {
-                const url = 'https://fakestoreapi.com/products';
+                    })
+                    productsContainer.innerHTML = products;
+                },
 
-                const response = await fetch(url);
-
-                if (!response.ok) {
-                    console.error("HTTP-Error: " + response.status);
-                    return;
-                }
-
-                const products = await response.json();
-
-                await this.getFromLocalStorage();
-                await this.storeToLocalStorage(products);
-
-                this.new(url);
-            },
-
-            new: async function (url) {
-                const controller = new AbortController();
-                const signal = controller.signal;
-
-                const options = await {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json;charset=utf-8'
-                    },
-                    body: JSON.stringify(this.newProduct),
-                    signal,
-                };
-
-                try {
-                    const response = await fetch(url, options);
-
-                    if (!response.ok) {
-                        console.error('HTTP-Error: ' + response.status);
-                        return;
-                    }
-
-                    const newProduct = await response.json();
-                    const getFromLocalStorage = await this.getFromLocalStorage();
-                    const productWithRating = {
-                        ...newProduct,
-                        rating: this.newProduct.rating || { rate: 0, count: 0 }
-                    }
-                    getFromLocalStorage.push(productWithRating);
-                    await this.storeToLocalStorage(getFromLocalStorage);
-
-                    await this.render();
-
-                    await setTimeout(() => {
-                        controller.abort();
-                        // alert('controller aborted');
-                    }, 10000);
-                } catch (error) {
-                    console.error('Error: ', error);
-                }
-
-            },
-
-            newProduct: {
-                category: "jewelery",
-                description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, tenetur?",
-                id: Date.now(),
-                image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-                price: 109.95,
-                rating: { rate: 3.9, count: 120 },
-                title: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, tenetur?",
-            },
-
-            // methods: {
-            storeToLocalStorage: (param) => {
-                return localStorage.setItem('products', JSON.stringify(param));
-            },
-
-            getFromLocalStorage: () => {
-                const storedData = localStorage.getItem('products');
-
-                if (storedData) {
+                fetchProducts: async function (url) {
                     try {
-                        return JSON.parse(storedData);
+                        const response = await fetch(url);
+
+                        if (!response.ok) {
+                            console.error("HTTP-Error: " + response.status);
+                            return {
+                                data: null,
+                                error: "Something went wrong. Try again!",
+                            }
+                        }
+
+                        const result = await response.json();
+                        return {
+                            data: result.products,
+                            error: null
+                        }
+
+                    } catch (error) {
+                        console.error("HTTP-Error: " + response.status);
+                        return {
+                            data: null,
+                            error: "HTTP-Error: " + response.status,
+                        }
+                    }
+                },
+
+                postProducts: async function (url, data) {
+                    try {
+                        const postUrl = url || 'https://dummyjson.com/products/add';
+
+                        const options = {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json;charset=utf-8'
+                            },
+                            body: JSON.stringify(data),
+                        };
+
+                        let response = await fetch(postUrl, options);
+
+                        if (!response.ok) {
+                            console.error("HTTP-Error: " + response.status);
+                            return {
+                                data: null,
+                                error: "Something went wrong. Try again!",
+                            }
+                        }
+
+                        const newProduct = await response.json();
+
+                        const localStorageData = await this.getFromLocalStorage();
+                        await localStorageData.push(newProduct);
+                        this.storeToLocalStorage(localStorageData);
+
+                        return {
+                            data: newProduct,
+                            error: null
+                        }
+
+                    } catch (error) {
+                        console.error("HTTP-Error: " + response.status);
+                        return {
+                            data: null,
+                            error: "HTTP-Error: " + response.status,
+                        }
+                    }
+                },
+
+                storeToLocalStorage: function (param) {
+                    return localStorage.setItem('products', JSON.stringify(param));
+                },
+
+                search: async function (searchValues) {
+                    try {
+                        let searchUrl = `https://dummyjson.com/products/search?q=${searchValues}`;
+                        const response = await fetch(searchUrl);
+                        if (response.ok) {
+                            const data = await response.json();
+                            products.render(data.products);
+                            return data.products;
+                        }
+                    }
+                    catch (error) {
+                        console.error('Error fetching data: ', error);
+                        return null;
+                    }
+                },
+
+                searchInput: function () {
+                    let debounceTimer;
+
+                    const search = document.getElementById('js_searchInput');
+
+                    search.addEventListener('input', function () {
+                        clearTimeout(debounceTimer);
+
+                        debounceTimer = setTimeout(function () {
+                            const searchValues = products.search(search.value.trim());
+                        }, 300);
+                    });
+                },
+
+                getFromLocalStorage: function () {
+                    try {
+                        return JSON.parse(localStorage.getItem('products')) || [];
                     } catch (error) {
                         console.error('Error parsing JSON from localStorage:', error);
                         return [];
                     }
+                },
+
+                setError: function () {
+                    console.error('Something went wrong!');
+                },
+
+                filterData: function () {
+                    const dropDown = document.querySelectorAll('#js_categoryFilter option');
+                    dropDown.forEach((element) => {
+                        element.addEventListener('change', function (e) {
+                            const selectedCategory = e.target.value;
+                            console.log(selectedCategory);
+                        })
+                    })
+                },
+
+                init: async function () {
+                    const data = products.getFromLocalStorage()
+                    products.filterData();
+                    if (!data.length) {
+                        const response = await products.fetchProducts("https://dummyjson.com/products");
+                        products.storeToLocalStorage(response.data);
+                    }
+                    products.render(products.getFromLocalStorage());
+                    products.searchInput();
                 }
-                return [];
-            },
-            // }
-        }
-        products.add();
+            }
+
+            products.init();
+        })()
     </script>
 </body>
 

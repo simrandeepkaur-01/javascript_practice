@@ -10,7 +10,7 @@
 
 <body class="flex justify-center items-center  flex-col bg-gray-100">
     <!-- navigation bar -->
-    <nav class="w-screen h-20 flex items-center  bg-gray-800">
+    <nav class="w-full h-20 flex items-center  bg-gray-800">
         <div class="w-1/2 ">
             <input id="js_search" type="search"
                 class=" w-[400px] px-3 py-1.5 rounded-full ml-28 placeholder:text-gray-800"
@@ -56,61 +56,6 @@
     </table>
 
     <script>
-        const searchProducts = {
-            input: document.querySelector('#js_searchInput'),
-            listContainer: document.querySelector('#js_searchProduct'),
-
-            debounce: function (func, delay) {
-                let timer;
-                return function (...args) {
-                    clearTimeout(timer);
-                    timer = setTimeout(() => func.apply(this, args), delay);
-                }
-            },
-
-            search: function () {
-                this.input.addEventListener('input', this.debounce(() => this.render(), 300));
-                //hide list on click on screen
-                document.addEventListener('click', (e) => {
-                    if (!this.listContainer.contains(e.target)) {
-                        this.listContainer.innerHTML = '';
-                        this.input.value = '';
-                    }
-                })
-            },
-
-            render: function () {
-                const products = JSON.parse(localStorage.getItem('products'));
-                let searchedProduct = '';
-
-
-                products.forEach(product => {
-                    const productTitle = product.title.trim().toLowerCase();
-                    const productCategory = product.category.trim().toLowerCase();
-
-                    const searchedValue = this.input.value.trim().toLowerCase();
-
-
-                    if (productCategory.includes(searchedValue) || productTitle.includes(searchedValue)) {
-                        searchedProduct += `<li class='py-2 px-2.5 cursor-pointer flex items-center hover:bg-[#f2f5fa] dark:bg-gray-300 dark:hover:bg-slate-200 dark:border-b dark:border-gray-200 font-medium'>
-                            <img src='${product.image}' class="mr-2 h-11 w-9">
-                            <a href="#">${productTitle}</a></li>`;
-                    }
-                })
-                this.listContainer.innerHTML = searchedProduct;
-
-                this.listContainer.addEventListener('click', (e) => {
-                    if (e.target.tagName === 'A') {
-                        this.input.value = e.target.textContent;
-                        // this.listContainer.innerHTML = '';
-                    }
-                })
-            }
-
-        }
-        searchProducts.search()
-
-
         const user = {
             getUserFromLocalStorage: JSON.parse(localStorage.getItem('formData')) || [],
 
