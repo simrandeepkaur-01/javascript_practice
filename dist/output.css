@@ -1534,6 +1534,10 @@ input[type="number"]::-webkit-inner-spin-button,
   height: 1rem;
 }
 
+.h-4\/6 {
+  height: 66.666667%;
+}
+
 .h-40 {
   height: 10rem;
 }
@@ -1717,6 +1721,10 @@ input[type="number"]::-webkit-inner-spin-button,
 
 .w-5 {
   width: 1.25rem;
+}
+
+.w-5\/12 {
+  width: 41.666667%;
 }
 
 .w-52 {
@@ -2559,6 +2567,12 @@ input[type="number"]::-webkit-inner-spin-button,
   margin-left: calc(7rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
+.space-x-3 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.75rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.75rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
 .space-x-32 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(8rem * var(--tw-space-x-reverse));
@@ -2623,6 +2637,12 @@ input[type="number"]::-webkit-inner-spin-button,
   --tw-space-y-reverse: 0;
   margin-top: calc(5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(5rem * var(--tw-space-y-reverse));
+}
+
+.space-y-3 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.75rem * var(--tw-space-y-reverse));
 }
 
 .space-y-4 > :not([hidden]) ~ :not([hidden]) {
@@ -3351,6 +3371,16 @@ input[type="number"]::-webkit-inner-spin-button,
 .bg-\[\#e9effa\] {
   --tw-bg-opacity: 1;
   background-color: rgb(233 239 250 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#fb641b\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(251 100 27 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#ff9f00\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 159 0 / var(--tw-bg-opacity));
 }
 
 .bg-\[rgb\(255\2c 0\2c 0\)\] {

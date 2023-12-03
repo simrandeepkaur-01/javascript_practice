@@ -41,20 +41,30 @@
             const form = document.querySelector('#js_addProduct');
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
-                const formData = new FormData(form);
+                try {
+                    const formData = new FormData(form);
 
-                formData.append('discountPercentage', formData.get('discountPercentage').toString());
+                    formData.append('discountPercentage', formData.get('discountPercentage').toString());
 
-                const newProduct = Object.fromEntries(formData);
-                const response = await products.postProducts("https://dummyjson.com/products/add", newProduct);
+                    const newProduct = Object.fromEntries(formData);
+                    const response = await products.postProducts("https://dummyjson.com/products/add", newProduct);
 
-                // this.addProductDialog.close();
-                // window.location.href = './new.html';
+                    window.location.href = './index.html';
+
+                    return {
+                        data: response,
+                        error: null
+                    }
+                } catch (error) {
+                    console.error('Something Went Wrong While Posting Data.');
+                    return {
+                        data: null,
+                        error: 'Something Went Wrong While Posting Data.'
+                    }
+                }
             })
         }
     };
-    addNewProduct.renderForm();
-    addNewProduct.onFormSubmit();
 
     const products = {
         render: function (productsFromLocalStorage) {
@@ -63,9 +73,8 @@
 
             productsFromLocalStorage.forEach((product) => {
                 const discountedPrice = product.price - (product.price * (product.discountPercentage / 100));
-                // console.log(product.discountPercentage)
-                // console.log(product.category)
-                products += `<li
+
+                products += `<li data-id="${product.id}"
                                 class=" w-80 hover:shadow-md hover:shadow-gray-400 rounded-lg  flex justify-center items-center flex-col cursor-pointer pt-4 h-[400px]" >
                                 <!-- image -->
                                 <div class=" w-56 h-56">
@@ -86,18 +95,19 @@
                                                 </path>
                                             </svg>
                                         </div>
-                                        <!-- <span class="text-gray-500">(${product.rating.count})</span> -->
+                                        
                                     </div>
 
                                     <!-- price -->
                                     <div class="flex space-x-2 items-center"><span class="font-semibold">&#8377;${discountedPrice.toFixed(2)}</span>
                                         <span class="text-gray-500 line-through">&#8377;${Number(product.price)}</span>
-                                        <div class="text-green-700 font-medium text-sm"><span>${product.discountPercentage}</span> <span>off</span></div>
+                                        <div class="text-green-700 font-medium text-sm"><span>${product.discountPercentage}%</span> <span>off</span></div>
                                     </div>
                                 </div>
                             </li>`;
             })
             productsContainer.innerHTML = products;
+
         },
 
         fetchProducts: async function (url) {
@@ -169,59 +179,62 @@
             }
         },
 
-        storeToLocalStorage: function (param) {
-            return localStorage.setItem('products', JSON.stringify(param));
+        debounce: function (func, delay) {
+            let debounceTimer;
+            return function (...args) {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => { func.apply(this, args) }, delay);
+            }
         },
 
-        search: async function (searchValues) {
-            try {
-                let searchUrl = `https://dummyjson.com/products/search?q=${searchValues}`;
-                const response = await fetch(searchUrl);
-                if (response.ok) {
-                    const data = await response.json();
-                    products.render(data.products);
+        search: function () {
+            const searchInput = document.querySelector('#js_searchInput');
+
+            const debouncedSearch = this.debounce(async (searchValues) => {
+                try {
+                    const response = await fetch(`https://dummyjson.com/products/search?q=${searchValues}`);
+                    if (response.ok) {
+                        const data = await response.json();
+                        this.renderSearch(data.products);
+                        return {
+                            data: data.products,
+                            error: null
+                        }
+                    }
+                } catch (error) {
+                    console.error('Something went wrong while searching products!');
                     return {
-                        data: data.products,
-                        error: null
+                        data: null,
+                        error: 'Something went wrong while searching products!'
                     }
                 }
-            }
-            catch (error) {
-                return {
-                    data: null,
-                    error: ('Error fetching data: ', error)
-                }
-            }
+            }, 300);
+
+            searchInput.addEventListener('input', () => debouncedSearch(searchInput.value.trim()));
         },
 
-        searchInput: function () {
-            let debounceTimer;
+        renderSearch: function (product) {
+            const searchProductContainer = document.querySelector('#js_searchProduct');
 
-            const search = document.getElementById('js_searchInput');
+            let searchedProducts = '';
 
-            search.addEventListener('input', function () {
-                clearTimeout(debounceTimer);
-
-                debounceTimer = setTimeout(function () {
-                    const searchValues = products.search(search.value.trim());
-                }, 300);
+            product.forEach((product) => {
+                searchedProducts += `<li data-id='${product.id}' class='py-2 px-2.5 cursor-pointer flex items-center hover:bg-[#f2f5fa] dark:bg-gray-300 dark:hover:bg-slate-200 dark:border-b dark:border-gray-200 font-medium'>
+                <img src='${product.thumbnail}' class="mr-2 h-11 w-9">
+                <span class="line-clamp-2">${product.title}</span></li>`;
             });
+
+            searchProductContainer.innerHTML = searchedProducts;
+
+            searchProductContainer.addEventListener('click', (e) => {
+                const productId = e.target.closest('LI').dataset.id;
+
+                window.location.href = `productDescription.html?id=${productId}`;
+            });
+
         },
 
-        getFromLocalStorage: function () {
-            try {
-                return JSON.parse(localStorage.getItem('products')) || [];
-            } catch (error) {
-                console.error('Error parsing JSON from localStorage:', error);
-                return [];
-            }
-        },
-
-        setError: function () {
-            console.error('Something went wrong!');
-        },
-
-        filterProducts: function () {
+        productCategories: function () {
             try {
                 const categories = document.querySelector('#js_productCategories');
 
@@ -229,10 +242,10 @@
                     const selectedCategory = e.target.value;
 
                     if (selectedCategory === 'all') {
-                        const response = await products.fetchProducts('https://dummyjson.com/products');
-                        this.render(response.data);
+                        const data = this.getFromLocalStorage();
+                        this.render(data);
                         return {
-                            data: response.data,
+                            data: data,
                             error: null
                         }
                     }
@@ -256,6 +269,36 @@
             }
         },
 
+        productDescription: function () {
+            const productsContainer = document.querySelector('#js_products');
+
+            productsContainer.addEventListener('click', (e) => {
+                const product = e.target.closest('LI');
+
+                if (product) {
+                    const id = product.dataset.id;
+                    window.location.href = `productDescription.html?id=${id}`;
+                }
+            })
+        },
+
+        storeToLocalStorage: function (param) {
+            return localStorage.setItem('products', JSON.stringify(param));
+        },
+
+        getFromLocalStorage: function () {
+            try {
+                return JSON.parse(localStorage.getItem('products')) || [];
+            } catch (error) {
+                console.error('Error parsing JSON from localStorage:', error);
+                return [];
+            }
+        },
+
+        setError: function () {
+            console.error('Something went wrong!');
+        },
+
         init: async function () {
             const data = products.getFromLocalStorage()
             if (!data.length) {
@@ -264,8 +307,13 @@
             }
             products.render(products.getFromLocalStorage());
 
-            products.filterProducts();
-            products.searchInput();
+            products.productCategories();
+            products.productDescription();
+            products.search();
+
+            addNewProduct.renderForm();
+            addNewProduct.onFormSubmit();
+
         }
     }
 
