@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id="js-ul"></ul>
+    <script>
+        (async function () {
+            const products = {
+                url: 'https://epic-free-games.p.rapidapi.com/epic-free-games',
+                options: {
+                    method: 'GET',
+                    headers: {
+                        // 'X-RapidAPI-Key': '313be6f39fmsh21f50063ad945fbp1876f5jsn538116439995',
+                        // 'X-RapidAPI-Host': 'epic-free-games.p.rapidapi.com'
+                    }
+                },
+
+                render: async function () {
+                    const ul = document.getElementById('js-ul')
+                    const gamesProduct = await this.fetchFun()
+                    gamesProduct.forEach(element => {
+                        console.log(element)
+                        const li = document.createElement('li');
+                        li.innerHTML = `${element.name}`;
+                        ul.append(li)
+                    });
+                },
+
+                fetchFun: async function () {
+                    try {
+                        const response = await fetch(this.url, this.options);
+                        const result = await response.json();
+                        console.log(result);
+                        return result;
+                    } catch (error) {
+                        console.error(error);
+                    }
+                }
+            }
+            // products.fetchFun()
+            await products.render()
+        })()
+    </script>
+</body>
+
+</html>
