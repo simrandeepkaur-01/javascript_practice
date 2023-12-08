@@ -13,7 +13,7 @@
                 const discountedPrice = product.price - (product.price * product.discountPercentage / 100);
                 totalDiscountedPrice += product.quantity * discountedPrice;
 
-                productMarkup += ` <li data-id=${product.id} class="flex items-center gap-4 p-4">
+                productMarkup += ` <li data-id=${product.id} class="flex items-center gap-4 p-4 relative">
                                         <!-- Product Image -->
                                         <div class="w-32 h-28">
                                             <img src="${product.thumbnail}" class="w-full h-full object-contain"
@@ -21,6 +21,12 @@
                                         </div>
 
                                         <!-- Product Description -->
+                                        <div class="absolute  right-2 top-2">
+                                            <button type="button" onclick="cart.methods.removeProduct(${product.id})"
+                                            class="text-gray-400 font-medium cursor-pointer">
+                                            <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21" fill="currentColor"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="translate(2 2)"><circle cx="8.5" cy="8.5" r="8">
+                                                </circle><g transform="matrix(0 1 -1 0 17 0)"><path d="m5.5 11.5 6-6"></path><path d="m5.5 5.5 6 6"></path></g></g></svg></button>
+                                        </div>
                                         <div class="space-y-1 w-full">
                                             <h2 class="text-lg font-medium">${product.title}</h2>
                                             <h3 class="text-md ">${product.description}</h3>
@@ -34,9 +40,6 @@
                                                         <span>off</span>
                                                     </div>
                                                 </div>
-
-                                                <button type="button" onclick="cart.methods.removeProduct(${product.id})"
-                                                    class="text-red-500 font-medium cursor-pointer">Remove</button>
 
                                                 <!-- Quantity -->
                                                 <div class="flex gap-1">
@@ -66,6 +69,7 @@
                                         </div>
                                     </li>`;
                 totalPrice += product.price * product.quantity;
+
             });
             productsListing.innerHTML = productMarkup;
 
@@ -89,14 +93,26 @@
                                             <dt>Total Amount</dt>
                                             <dd>&#8377;${totalDiscountedPrice.toFixed(2)}</dd>
                                         </dl>`;
+            this.methods.amountToPay(totalDiscountedPrice);
         },
 
         methods: {
+            amountToPay: function (totalDiscountedPrice) {
+                const amount = {
+                    amount: totalDiscountedPrice.toFixed(2)
+                }
+                localStorage.setItem('priceToPay', JSON.stringify([amount]));
+            },
+
             increaseQuantity: function (productId) {
                 const localStorageData = cart.methods.getFromLocalStorage();
                 const updatedCart = localStorageData.map((product) => {
                     if (product.id === productId) {
-                        product.quantity = (product.quantity || 1) + 1;
+                        if (product.quantity < product.stock) {
+                            product.quantity = (product.quantity || 1) + 1;
+                        } else {
+                            alert("Quantity exceeds stock!");
+                        }
                     }
                     return product;
                 });
@@ -106,14 +122,20 @@
 
             decreaseQuantity: function (productId) {
                 const localStorageData = cart.methods.getFromLocalStorage();
-                const updatedCart = localStorageData.map((product) => {
-                    if (product.id === productId && product.quantity > 1) {
-                        product.quantity -= 1;
-                    } else {
-                        this.removeProduct(productId);
+
+                const updatedCart = localStorageData.map(product => {
+                    if (product.id === productId && product.quantity > 0) {
+                        if (product.quantity === 1) {
+                            const confirmRemove = window.confirm("Are you sure you want to remove this product?");
+                            if (!confirmRemove) {
+                                return product;
+                            }
+                        }
+                        return { ...product, quantity: product.quantity - 1 };
                     }
                     return product;
-                });
+                }).filter(product => product.quantity > 0);
+
                 cart.methods.storeToLocalStorage(updatedCart);
                 cart.render(updatedCart);
             },
@@ -133,6 +155,12 @@
             removeProduct: function (productId) {
                 const localStorageData = cart.methods.getFromLocalStorage();
                 const updatedCart = localStorageData.filter((product) => product.id !== productId);
+
+                const confirmRemove = window.confirm("Are you sure you want to remove this product?");
+                if (!confirmRemove) {
+                    return;
+                }
+
                 cart.methods.storeToLocalStorage(updatedCart);
                 cart.render(updatedCart);
             },

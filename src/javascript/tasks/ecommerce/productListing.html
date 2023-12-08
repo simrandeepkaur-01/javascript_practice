@@ -4,18 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore our wide range of products, including electronics, clothing, and more. Find the perfect items for your needs.">
+    <meta name="keywords" content="products, electronics, clothing, online shopping, ecommerce">
+
     <title>Home Page</title>
     <link rel="stylesheet" href="../../../../dist/output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.0/viewer.min.css">
 </head>
 
-<body>
+<body class="bg-gray-100">
     <!-- header -->
     <header class="mb-20">
         <!-- Navigation Bar -->
-        <nav class=" bg-[#2370f4] flex items-center dark:bg-indigo-800 fixed w-full top-0 left-0 z-20 xl:px-36 py-4">
+        <nav class=" bg-[#2370f4] flex items-center dark:bg-indigo-800 fixed w-full top-0 left-0 z-20 py-4">
             <ul class="flex justify-around w-full flex-wrap gap-4 px-2">
                 <!-- logo -->
-                <li><span class="text-white">LOGO</span></li>
+                <li class="flex flex-col ">
+                    <img width="75"
+                        src="	https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/flipkart-plus_8d85f4.png"
+                        alt="Flipkart" title="Flipkart"><a
+                        class="text-white italic flex w-4 h-4 items-center space-x-1">Explore
+                        <span class="text-[#ffe11b] ml-0.5">Plus</span>
+                        <img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/plus_aef861.png"
+                            alt="Flipkart-plus"></a>
+                </li>
 
                 <!-- search bar -->
                 <li class="w-96 xl:w-[550px] relative ">
@@ -39,7 +51,7 @@
 
                 <!-- cart -->
                 <li class="flex gap-2 justify-center items-center relative">
-                    <a href="cart.html" class="absolute inset-0 z-20"></a>
+                    <a href="checkout.html" class="absolute inset-0 z-20"></a>
                     <div class="relative">
                         <svg class="w-7 h-7 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"
                             fill="currentColor">
@@ -66,8 +78,17 @@
     </main>
 
     <!-- footer -->
-    <footer></footer>
+    <footer>
+        <div class="bg-black bg-opacity-90 text-white text-sm flex justify-around py-6">
+            <div><a href="#" aria-label="Become A Seller">Become a Seller</a></div>
+            <div><a href="#" aria-label="Advertise">Advertise</a></div>
+            <div><a href="#" aria-label="Gift Cards">Gift Cards</a></div>
+            <div><a href="#" aria-label="Help Center">Help Center</a></div><span>©
+                2007-2023<span>Flipkart.com</span>
+        </div>
+    </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.0/viewer.min.js"></script>
     <script src="productListing.js" defer></script>
 </body>
 
